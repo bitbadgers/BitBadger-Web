@@ -1,29 +1,42 @@
+/* --- css reset --- */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat', 'sans-serif';
 }
-
-.header {
-    display: flex;
-    background-color: rgba(2, 1, 14, 0.9);
-    margin: auto;
-    /* color: */
-    padding: 30px;
-    justify-content: space-between;
-    box-shadow: 30px 0 40px rgba(0, 0, 0),
-        -30px 0px 40px rgba(0, 0, 0, 0.1);
+.header-bg{
+    /* border: red solid 5px; */
+    background: url('../images/image1.jpg') no-repeat center center/cover;
+    filter: opacity(0.4);
+    height: 500px;
 }
 
-/* ============= Navbar & logo ============================== */
 
+.header {
+    position: absolute;
+    display: flex;
+    /* background-color: rgb(27, 27, 27); */
+    margin: auto;
+    padding: 30px;
+    justify-content: space-between;
+    /* box-shadow: 30px 0 40px rgba(0, 0, 0, 0.1),
+        -30px 0px 40px rgba(0, 0, 0, 0.1); */
+    top: 1px;
+    width: 100%;
+    background: linear-gradient(to top, rgba(7, 4, 4, 1), rgba(0,0,0, 0.1) );
+  
+
+}
+/* --- logo --- */
 .logo h1 {
     /* margin-top:5px; */
     color: #fff;
 
 }
 
+/* --- navigation --- */
 .navbar li {
     display: inline-block;
     margin-top: 10px;
@@ -38,7 +51,10 @@
 
 .navbar a {
     text-decoration: none;
-    color: #fff;
+    color: white;
+    letter-spacing: 1px;
+    font-size: x-large;
+    font-weight: 800;
 }
 
 .navbar a:hover {
@@ -47,22 +63,31 @@
     border-radius: 30px;
 }
 
-/* ============== Showcase ===================== */
-
+/* --- showcase --- */
 .showcase {
+    position: absolute;
     text-align: center;
     padding-top: 80px;
-    /* background-color:blue; */
-    background: #293f50;
-    box-shadow: 30px 0 40px rgba(0, 0, 0, 0.7),
-        -30px 0px 40px rgba(0, 0, 0, 0.1);
+    color: black;
+    height: 600px;
+    /* box-shadow: 30px 0 40px rgba(0, 0, 0, 0.1),
+        -30px 0px 40px rgba(0, 0, 0, 0.1); */
+    height: 350px;  
+    top: 100px;
+    right: 5%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+.showcase h1{
+    padding-bottom: 30px;
+}
+
 
 .welcome {
     color: powderblue;
     font-size: 30px;
 }
 
+/* --- button --- */
 .btn-hero {
     border: 1px solid #fff;
     padding: 10px 30px;

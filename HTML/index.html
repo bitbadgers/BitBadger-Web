@@ -1,55 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../CSS/Home.css">
     <title>Document</title>
 </head>
+
 <body>
-    <header>
+
+    <div class="header-bg">
+     
+    </div>
+ 
+       <!-- header section -->
+ 
+       <header>
+         <div class="header">
+             <div class="logo">
+                 <h1><span class="active">bitBadgers</span></h1>
+             </div>
+             <div class="navbar" id="navigate">
+                 <ul>
+                     <li><a  class="current" href="#">home</a></li>
+                     <li><a href="#">about</a></li>
+                     <li><a href="#">techs</a></li>
+                     <li><a href="#">more</a></li>
+                 </ul>
+                 <span href="javascript:void(0);" onclick="collapser()" class="nav-icon"> &#9776; </span>
+                 <script type="text/javascript">
+                     function collapser() {
+                         var x = document.getElementById("navigate");
+                         if (x.className === "navbar") {
+                             x.className += "-clicked";
+                         } else {
+                             x.className = "navbar";
+                         }
+                     }
+                 </script>
+             </div>
+         </div>  
+     </header>
+ 
+     <section>
+         <div class="showcase">
+             <h1>Welcome to Bitbadgers</h1>
+             <h2><em> A place Where Future Developers .</em></h2>
+
+             <p>Every year, the university enrols over 300 students interested in technological skills. This platform
+                 welcomes you
+                 to find out the best path and get to listen Amazing developer stories.</p>
+
+             <button class="btn btn-hero">
+                Join as now
+            </button>
+ 
+         </div>
+     </section>
+    </div>
+<!-- hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh -->
+    <!-- <header>
         <div class="header">
             <div class="logo">
                 <h1><span class="active">Bitbadgers</span></h1>
             </div>
-            <div class="navbar" id = "navigate">
+            <div class="navbar" id="navigate">
                 <ul>
-                    <li><a  class="current" href="#">Home</a></li>
+                    <li><a class="current" href="#">Home</a></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Services</a></li>
                     <li><a href="#">Contact</a></li>
                 </ul>
-                <span href="javascript:void(0);" onclick="collapser()" class = "nav-icon">  &#9776; </span>
-                <script type="text/javascript">
-                    function collapser() {
-                        var x = document.getElementById("navigate");
-                        if (x.className === "navbar") {
-                            x.className += "-clicked";
-                        } else {
-                            x.className = "navbar";
-                        }
-                    } 
-                </script>
+              
             </div>
-            
-        </div>
-        
-    </header>
+
+        </div> -->
+
+    <!-- </header>
     <section>
         <div class="showcase">
-            <h1 class = "welcome">Welcome to Bitbadgers</h1>
+            <h1 class="welcome">Welcome to Bitbadgers</h1>
             <section class="hero">
                 <h2><em> Dedicated To Ultimate Junior Developer Skills development.</em></h2>
-        
-                <p>Every year, the university enrols over 300 students interested in technological skills. This platform welcomes you
-                    to find out the best path and get to listen  Amazing developer stories.</p>
-        
-                <button class="btn btn-hero">
-                    Join as now
-                </button>
-        
+
+                <p>Every year, the university enrols over 300 students interested in technological skills. This platform
+                    welcomes you
+                    to find out the best path and get to listen Amazing developer stories.</p>
+
+                
+
             </section>
-        </div></section>
+        </div>
+    </section> -->
 
     <!--teaser-->
     <section class="row ">
@@ -95,4 +138,5 @@
     </section>
     </section>
 </body>
+
 </html>
