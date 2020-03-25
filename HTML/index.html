@@ -5,8 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../CSS/Home.css">
+    <link rel="stylesheet" href="../CSS/modalLogIn.css">
+    <link rel="stylesheet" href="../CSS/navbar.css">
+    <link rel="stylesheet" href="../CSS/showcase.css">
+    <link rel="stylesheet" href="../CSS/reset.css">
     <title>bitBadger</title>
     <link rel="shortcut icon" type="image/x-icon" href="../images/bit_badgersicon.jpg" />
+    <script type="text/javascript" src="../Javascript/index.js"></script>
 </head>
 
 <body>
@@ -27,26 +32,33 @@
                 </figure>
             </div>
             <div class="navbar" id="navigate">
-                <ul>
-                    <li><a class="current" href="#">home</a></li>
-                    <li><a href="#">about</a></li>
-                    <li><a href="#">techs</a></li>
-                    <li><a href="#">more</a></li>
-                </ul>
+                <div class = "nav">
+                    <div> <a class ="current" href="#"> home </a> </div>
+                    <div> <a href="#"> about </a> </div>                                   
+                    <div class = "drop">
+                        <a href="#"> Tech &#9662; </a>
+                        <div class = "drop-down">
+                            <a href="#"> IOT </a>
+                            <a href="#"> Machine Learning</a>
+                            <a href="#"> Web Development</a>
+                            <a href="#"> Mobile Application</a>
+                        </div>
+                    </div>
+                    <div class  = "drop">
+                        <a href="#">more &#9662; </a>
+                        <div class = "drop-down">
+                            <a href="">Our Meetings</a>
+                            <a href="">Our Goals</a>
+                            <a href="">Our Acheivements</a>
+                        </div>
+                    </div>
+                </div>
                 <span href="javascript:void(0);" onclick="collapser()" class="nav-icon"> &#9776; </span>
-                <script type="text/javascript">
-                    function collapser() {
-                        var x = document.getElementById("navigate");
-                        if (x.className === "navbar") {
-                            x.className += "-clicked";
-                        } else {
-                            x.className = "navbar";
-                        }
-                    }
-                </script>
             </div>
         </div>
     </header>
+
+    <!-- The showcase -->
 
     <section class="container">
         <div class="showcase">
@@ -61,7 +73,43 @@
             <button class="btn btn-hero">
                 Join as now
             </button>
+            <button class="btn btn-hero" onclick="document.getElementById('id01').style.display='block'">
+                Log In
+            </button>
 
+
+            <!-- Login form -->
+
+
+            <div id="id01" class="modal-login">
+
+                <form class="modal-login-content animate" action="" method="post">
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                            title="Close Modal">&times;</span>
+                        <img src="../images/badge.png" alt="Avatar" class="avatar">
+                    </div>
+
+                    <div class="container">
+                        <label for="uname"><b>Username</b></label>
+                        <input type="text" placeholder="Enter Username" name="uname" required>
+
+                        <label for="psw"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" name="psw" required>
+
+                        <button type="submit">Login</button>
+                        <label>
+                            <input type="checkbox" checked="checked" name="remember"> Remember me
+                        </label>
+                    </div>
+
+                    <div class="container" style="background-color:#f1f1f1">
+                        <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                            class="cancelbtn">Cancel</button>
+                        <span class="psw">Forgot <a href="#">password?</a></span>
+                    </div>
+                </form>
+            </div>
         </div>
     </section>
     </div>

@@ -1,38 +1,3 @@
-/* --- css reset --- */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', 'sans-serif';
-}
-.header-bg{
-    background: url('../images/image1.jpg') no-repeat center center/cover;
-    filter: opacity(0.4);
-    height: 500px;
-}
-
-.container{
-    width: 95%;
-    margin: auto;
-}
-
-/* -------- clear-fix -------- */
-.group:before,
-.group:after {
-    content: "";
-    display: table;
-}
-
-.group:after {
-    clear: both;
-}
-
-.group {
-    clear: both;
-    *zoom: 1;
-}
-
 /* --- header ---  */
 
 .header {
@@ -43,9 +8,9 @@
     justify-content: space-between;
     top: 1px;
     width: 100%;
-    background: linear-gradient(to bottom, rgba(7, 4, 4, 1), rgba(0,0,0, 0) );
+    background: linear-gradient(to bottom, rgba(7, 4, 4, 1), rgba(0, 0, 0, 0));
     /* background-color: black; */
-  
+
 }
 
 /* --- logo --- */
@@ -53,78 +18,16 @@
     /* color: #fff; */
     border-radius: 5px;
 }
-.logo img{
+
+.logo img {
     border-radius: 5px;
 }
-figcaption{
+
+figcaption {
     color: #6BE476;
 }
 
-/* --- navigation --- */
-
-.navbar li {
-    display: inline-block;
-    margin-top: 10px;
-    padding-right: 40px;
-
-}
-
-/* hide the nav icon */
-
-.nav-icon {
-
-    display: none;
-}
-
-
-.navbar a {
-    text-decoration: none;
-    color: #6BE476;
-    letter-spacing: 2px;
-    font-size: 18px;
-    background: black;
-    border-radius: 30px;
-    padding: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-
-.navbar a:hover {
-    background: black;
-    
-    
-}
-
-/* --- showcase --- */
-
-.showcase {
-    position: absolute;
-    text-align: center;
-    padding-top: 80px;
-    color: black;
-    height: 600px;
-    height: 350px;  
-    top: 100px;
-    right: 15%;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    width: 75%;
-    line-height: 44px;
-    letter-spacing: .5px;
-    line-height: 44px;
-    z-index: 1;
-}
-.showcase h6{
-   font-size: 44px;
-   font-family: monospace;
-}
-
-
-.welcome {
-    color: powderblue;
-    font-size: 30px;
-}
-
-/* --- button --- */
+/* --- buttons --- */
 
 .btn-hero {
     border: 1px solid #fff;
@@ -135,6 +38,18 @@ figcaption{
     background-color: black;
     margin-top: 25px;
     font-size: 20px;
+    animation: animateBtn 4s;
+}
+
+@keyframes animateBtn {
+    
+    from {
+        -webkit-transform: scale(0.5)
+    }
+
+    to {
+        -webkit-transform: scale(1)
+    }
 }
 
 .btn-hero:hover {
@@ -151,23 +66,26 @@ figcaption{
 .btn-hero a:hover {
     color: #cf0707;
 }
+
 /* --- info --- */
-.info{
+.info {
     background-color: rgb(197, 251, 212);
 }
-.info p{
-    text-align:center;
-    font-size:1.5rem;
-    color:grey;
-    padding-top:5px;
+
+.info p {
+    text-align: center;
+    font-size: 1.5rem;
+    color: grey;
+    padding-top: 5px;
     padding-bottom: 5px;
 }
 
 /* --- wat we do --- */
-.bd{
+.bd {
     padding-top: 20px;
-    background: linear-gradient(to bottom, rgba( 218, 222, 221, 1), rgba(217, 221, 221, 0));
+    background: linear-gradient(to bottom, rgba(218, 222, 221, 1), rgba(217, 221, 221, 0));
 }
+
 .wat-we-do {
     padding: 0 0 50px 0;
 }
@@ -184,7 +102,8 @@ figcaption{
     text-align: center;
     padding: 50px;
     padding-top: 20px;
-    
+    overflow: hidden;
+
 }
 
 .content p {
@@ -212,7 +131,8 @@ aside img {
     vertical-align: top;
     text-align: center;
     letter-spacing: .6px;
-    line-height: 28px;;
+    line-height: 28px;
+    ;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -222,12 +142,11 @@ aside img {
     color: #6BE476;
 }
 
-
 /* ---- round button wat-we-do --- */
 a {
     text-decoration: none;
     padding: 8px 16px;
-    
+
 }
 
 a:hover {
@@ -235,28 +154,32 @@ a:hover {
     color: black;
 }
 
-.previous, .next{
+.previous,
+.next {
     height: 50px;
     width: 50px;
     position: absolute;
     top: 45%;
-    
+
 }
-#prev{
+
+#prev {
     background-color: #6DE368;
     color: black;
-    left: 1px; 
+    left: 1px;
 }
-#nex{
+
+#nex {
     background-color: #6DE368;
     color: black;
     right: 1px;
 }
 
-#prev:hover{
+#prev:hover {
     background-color: rgb(218, 222, 221);
 }
-#nex:hover{
+
+#nex:hover {
     background-color: rgb(218, 222, 221);
 }
 
@@ -268,78 +191,25 @@ a:hover {
 
 /* --- row/sections --- */
 
-
-
 .row {
     background-color: #000000;
     padding-top: 44px;
     padding-bottom: 55px;
 }
 
-
 /* --- responsivity part  --- */
 
 @media screen and (max-width:600px) {
-    .showcase{
-        z-index: 2;
-    }
     .hero {
         font-size: 12px;
         padding: 2px;
     }
 
-    /* --- Responsive navbar --- */
+    /* responsive what we do content  */
 
-    .navbar ul {
-        display: none;
+    .content {
+        font-size: 12px;
     }
-
-    .nav-icon {
-        font-size: 30px;
-        display: block;
-        color: white;
-        cursor: pointer;
-    }
-
-    .nav-icon:hover {
-        color: blue;
-    }
-
-    .navbar-clicked ul {
-        text-justify: inherit;
-        display: block;
-        width: 40%;
-        height: 100%;
-        position: absolute;
-        top: 97px;
-        right: 0px;
-        background-color: rgba(2, 1, 14, 0.7);
-        transform: scaleX(1.5);
-        list-style-type: none;
-        text-align: left;
-        transition: width 2s, transform 2s;
-        z-index: 1;
-
-    }
-
-    .navbar-clicked li {
-        padding: 10px;
-        width: 100%;
-    }
-
-    .navbar-clicked a {
-        color: white;
-        text-decoration: none;
-        font-size: 15px;
-        padding: 11px 200px 11px 0px;
-    }
-
-    .navbar-clicked a:hover,
-    .navbar-clicked li:hover {
-        background-color: rgb(0, 255, 128);
-        color: black;
-    }
-
 
     /* --- sections responsivity --- */
 
