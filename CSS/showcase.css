@@ -1,6 +1,7 @@
 /* This css file styles the showcase */
 
 .showcase {
+    border-radius: 0 85% 0 0;
     position: absolute;
     text-align: center;
     padding-top: 80px;
@@ -53,6 +54,9 @@
     font-size: 30px;
 }
 @media screen and (max-width:600px) {
+    .showcase{
+        border: none;
+    }
     .showcase h1 {
         animation: animate 0.6s;
     }
