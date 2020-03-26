@@ -49,6 +49,7 @@ care of its responsivity */
     border-radius: 5px;
     background: #6BE476;
     color:black;
+    border-radius: 20px;
 }
 
 /* drop-down links in the navbar */
@@ -56,6 +57,7 @@ care of its responsivity */
     display: none;
     background-color:  rgba(2, 1, 14, 0.7);
     position: absolute;
+    border-radius: 10px;
 }
 
 .drop-down a {
