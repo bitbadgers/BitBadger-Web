@@ -3,24 +3,19 @@
 .header {
     position: absolute;
     display: flex;
-    margin: auto;
+    margin: 0 auto;
     padding: 30px;
     justify-content: space-between;
     top: 1px;
     width: 100%;
     background: linear-gradient(to bottom, rgba(7, 4, 4, 1), rgba(0, 0, 0, 0));
-    /* background-color: black; */
 
 }
 
 /* --- logo --- */
-.logo h1 {
-    /* color: #fff; */
-    border-radius: 5px;
-}
 
 .logo img {
-    border-radius: 5px;
+    border-radius: 50%;
 }
 
 figcaption {
@@ -69,25 +64,27 @@ figcaption {
 
 /* --- info --- */
 .info {
-    background-color: rgb(197, 251, 212);
+    background: linear-gradient(to bottom, rgba(197, 251, 212, 1), rgba(197, 251, 212, 0));
+    margin-bottom: 10px;
 }
 
 .info p {
     text-align: center;
     font-size: 1.5rem;
-    color: grey;
+    color: rgb(29, 29, 29);
     padding-top: 5px;
     padding-bottom: 5px;
 }
 
 /* --- wat we do --- */
 .bd {
-    padding-top: 20px;
+    
     background: linear-gradient(to bottom, rgba(218, 222, 221, 1), rgba(217, 221, 221, 0));
 }
 
 .wat-we-do {
-    padding: 0 0 50px 0;
+    padding: 0 0 50px 20;
+    margin: 0 auto;
 }
 
 .content {
@@ -103,6 +100,7 @@ figcaption {
     padding: 50px;
     padding-top: 20px;
     overflow: hidden;
+    margin-left: 2%;
 
 }
 
@@ -132,7 +130,6 @@ aside img {
     text-align: center;
     letter-spacing: .6px;
     line-height: 28px;
-    ;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -200,6 +197,15 @@ a:hover {
 /* --- responsivity part  --- */
 
 @media screen and (max-width:600px) {
+    .content{
+        width: 100%;
+        margin: auto;
+    }
+    aside{
+        width: 98%;
+        border-radius: 0;
+        margin: 0 auto;
+    }
     .hero {
         font-size: 12px;
         padding: 2px;

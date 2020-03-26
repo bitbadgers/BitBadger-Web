@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/reset.css">
     <link rel="stylesheet" href="../CSS/Home.css">
-    <link rel="stylesheet" href="../CSS/modalLogIn.css">
+    <link rel="stylesheet" href="../CSS/modallogin2.css">
     <link rel="stylesheet" href="../CSS/navbar.css">
     <link rel="stylesheet" href="../CSS/showcase.css">
-    <link rel="stylesheet" href="../CSS/reset.css">
+
     <title>bitBadger</title>
     <link rel="shortcut icon" type="image/x-icon" href="../images/bit_badgersicon.jpg" />
     <script type="text/javascript" src="../Javascript/index.js"></script>
@@ -32,21 +33,21 @@
                 </figure>
             </div>
             <div class="navbar" id="navigate">
-                <div class = "nav">
-                    <div> <a class ="current" href="#"> home </a> </div>
-                    <div> <a href="#"> about </a> </div>                                   
-                    <div class = "drop">
+                <div class="nav">
+                    <div> <a class="current" href="#"> home </a> </div>
+                    <div> <a href="#"> about </a> </div>
+                    <div class="drop">
                         <a href="#"> Tech &#9662; </a>
-                        <div class = "drop-down">
+                        <div class="drop-down">
                             <a href=""> IOT </a>
                             <a href=""> Machine Learning</a>
                             <a href=""> Web Development</a>
                             <a href=""> Mobile Application</a>
                         </div>
                     </div>
-                    <div class  = "drop">
+                    <div class="drop">
                         <a href="#">more &#9662; </a>
-                        <div class = "drop-down">
+                        <div class="drop-down">
                             <a href="">Our Meetings</a>
                             <a href="">Our Goals</a>
                             <a href="">Our Acheivements</a>
@@ -73,6 +74,7 @@
             <button class="btn btn-hero">
                 Join as now
             </button>
+
             <button class="btn btn-hero" onclick="document.getElementById('id01').style.display='block'">
                 Log In
             </button>
@@ -81,47 +83,52 @@
             <!-- Login form -->
 
 
-            <div id="id01" class="modal-login">
+            <div id="id01" class="modal-login animate">
 
-                <form class="modal-login-content animate" action="" method="post">
-                    <div class="imgcontainer">
-                        <span onclick="document.getElementById('id01').style.display='none'" class="close"
-                            title="Close Modal">&times;</span>
-                        <img src="../images/badge.png" alt="Avatar" class="avatar">
-                    </div>
+                <form class="modal-login-content " action="" method="post">
+                    <div class="box ">
+                        <h2>Log in <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                                title="Close Modal">&times;</span></h2>
+                        <div class="imgcontainer">
 
-                    <div class="container">
-                        <label for="uname"><b>Username</b></label>
-                        <input type="text" placeholder="Enter Username" name="uname" required>
+                            <img src="../images/badge.png" alt="Avatar" class="avatar">
+                        </div>
 
-                        <label for="psw"><b>Password</b></label>
-                        <input type="password" placeholder="Enter Password" name="psw" required>
 
-                        <button type="submit">Login</button>
-                        <label>
-                            <input type="checkbox" checked="checked" name="remember"> Remember me
-                        </label>
-                    </div>
+                        <div class="inputBox">
+                            <input type="text" name="uname" required>
+                            <label for="uname">Username</label>
+                        </div><br>
+                        <div class="inputBox">
+                            <input type="password" name="psw" required>
+                            <label for="psw">Password</label>
+                        </div>
+                        <input type="submit" name="" value="Login" class="btn-animate">
 
-                    <div class="container" style="background-color:#f1f1f1">
+                    <input type="checkbox" checked="checked" name="remember"> Remember me</input>
+                        <div class="psw"> <a href="#"> Forgot password?</a></div>
+                         
+
                         <button type="button" onclick="document.getElementById('id01').style.display='none'"
-                            class="cancelbtn">Cancel</button>
-                        <span class="psw">Forgot <a href="#">password?</a></span>
+                            class="cancelbtn"><a href="">Cancel</a></button>
+
+
                     </div>
                 </form>
             </div>
         </div>
     </section>
     </div>
-    <!-- info -->
-    <div class="info">
-        <p>what we do</p>
-    </div>
+    
     <!-- how we do it -->
 
     <div class="bd">
+        <!-- info -->
+    <div class="info">
+        <p>what we do</p>
+    </div>
         <div class="wat-we-do">
-            <section class="container wat-we-doit-child group">
+            <section class="container wat-we-do-it-child group">
                 <div class="content sec-1">
                     <a href="/web.dev.html">
                         <h3>Web.Dev</h3>
