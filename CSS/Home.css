@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* --- header ---  */
 
 .header {
@@ -10,10 +11,34 @@
     width: 100%;
     background: linear-gradient(to bottom, rgba(7, 4, 4, 1), rgba(0, 0, 0, 0));
 
+=======
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+/* --- css reset --- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', 'sans-serif';
+}
+
+/* --- header ---  */
+
+.header {
+    display: flex;
+    background-color: #777;
+    margin: auto;
+    padding: 30px;
+    justify-content: space-between;
+    box-shadow: 30px 0 40px rgba(0, 0, 0, 0.1),
+        -30px 0px 40px rgba(0, 0, 0, 0.1);
+>>>>>>> feature-branch
 }
 
 /* --- logo --- */
 
+<<<<<<< HEAD
 .logo img {
     border-radius: 50%;
 }
@@ -222,5 +247,160 @@ a:hover {
     .sec-1 {
         display: block;
         width: auto;
+=======
+.logo h1 {
+    color: #fff;
+}
+
+/* --- navigation --- */
+
+.navbar li {
+    display: inline-block;
+    margin-top: 10px;
+    padding-right: 40px;
+
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.navbar a:hover {
+    background: black;
+    padding: 10px;
+    border-radius: 30px;
+
+
+}
+
+/* --- showcase --- */
+
+.showcase {
+    text-align: center;
+    padding-top: 80px;
+    color: orangered;
+    background: url('../images/image1.jpg') no-repeat center center/cover;
+    height: 600px;
+    box-shadow: 30px 0 40px rgba(0, 0, 0, 0.1),
+        -30px 0px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* --- what we do --- */
+
+.info h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: grey;
+    padding-top: 30px;
+    margin-bottom: 30px;
+}
+
+.boxes {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 30px;
+    box-shadow: 30px 0 40px rgba(0, 0, 0, 0.1),
+        -30px 0px 40px rgba(0, 0, 0, 0.1);
+
+}
+
+.boxes .box {
+    width: 30%;
+    display: block;
+    ;
+}
+
+.boxes .box h4 {
+    text-align: center;
+    padding-left: -20px;
+    padding-top: 20px;
+}
+
+/* --- how we do it --- */
+
+.main h4 {
+    font-weight: bold;
+    padding-top: 20px;
+}
+
+.aside {
+    display: flex;
+    height: 300px;
+    justify-content: space-around;
+    box-shadow: 30px 0 40px rgba(0, 0, 0, 0.1),
+        -30px 0px 40px rgba(0, 0, 0, 0.1);
+
+
+}
+
+.aside .main {
+    width: 40%;
+
+}
+
+.aside .main ol {
+    padding-left: 50px;
+}
+
+.aside .side {
+    background: url('../images/image3.jpg') no-repeat center center/cover;
+    width: 50%;
+}
+
+.aside .side h4 {
+    color: white;
+    text-align: center;
+}
+
+#other {
+    margin-bottom: 20px;
+}
+
+/* --- footer --- */
+
+footer {
+    display: flex;
+    background: black;
+    color: grey;
+    position: relative;
+    justify-content: space-around;
+}
+
+footer nav li {
+    padding: 30px;
+    display: inline-block;
+}
+
+footer nav li a {
+    text-decoration: none;
+    color: grey;
+}
+
+footer nav li a:hover {
+    background: #333;
+    color: #fff;
+    padding: 20px 5px;
+    ;
+}
+
+footer p {
+    padding-top: 30px;
+
+}
+
+/* --- responsive --- */
+
+@media(max-width:900px) {
+    .boxes {
+        display: block;
+        ;
+        /* flex-direction:column; */
+        width: 100%;
+        padding: 0;
+        margin: 0;
+
+>>>>>>> feature-branch
     }
 }
