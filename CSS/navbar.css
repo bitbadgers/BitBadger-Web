@@ -1,0 +1,130 @@
+/* This Css file styles the nav bar and takes
+care of its responsivity */
+.nav-icon {
+    display: none;
+}
+
+.nav{
+    display: inline-flex; 
+    position:relative;
+    right:60px;
+    animation: navAnimate 1s;
+}
+.nav div{
+    padding: 10px;
+    animation: navDivAnimate 2s;
+}
+/* animate the divs in the navbar */
+@keyframes navDivAnimate{
+    from{
+        padding:0px;
+    }
+    to{
+        padding:10px;
+    }
+}
+
+/* animate the navbar */
+@keyframes navAnimate{
+    from{
+        right:0px;
+    }
+    to{
+        right:100px;
+    }
+}
+
+.nav a {
+    text-decoration: none;
+    color: #6BE476;
+    letter-spacing: 2px;
+    font-size: 18px;
+    padding: 10px;
+    padding-top: 5px;
+    margin-top: 10px;
+    padding-bottom: 5px;
+    transition-property: background, color, border-radius;
+    transition-duration: 0.3s, 0.1s, 1s;
+    transition-timing-function: linear, linear, linear;
+    transform-origin: left;
+}
+
+.nav a:hover {
+    border-radius: 5px;
+    background: #6BE476;
+    color:black;
+    border-radius: 20px;
+}
+
+/* drop-down links in the navbar */
+.drop-down {
+    display: none;
+    background-color:  rgba(2, 1, 14, 0.7);
+    position: absolute;
+    border-radius: 10px;
+}
+
+.drop-down a {
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 0px;
+    font-size:12;
+}
+.drop:hover .drop-down{
+    display:block;
+}
+/* Responsivity */
+@media screen and (max-width:600px){
+
+    .nav {
+        display: none;
+    }
+    .nav-icon {
+        font-size: 30px;
+        display: block;
+        color: #6BE476;
+        cursor: pointer;
+    }
+
+    .nav-icon:hover {
+        color: blue;
+    }
+
+    /*navbar after the nav icon is clicked  */
+
+    .navbar-clicked .nav {
+        text-justify: inherit;
+        display: block;
+        width: 100%;
+        height: auto;
+        position: fixed;
+        top: 70px;
+        right: 0px;
+        background-color: rgba(2, 1, 14, 0.7);
+        list-style-type: none;
+        text-align: left;
+        z-index: 2;
+        animation: navZoom 1s;
+    }
+    
+    .drop-down{
+        position: static;
+        margin-left: 20px;
+        background-color: rgba(0, 0, 0, 0);
+    }
+    /* animate the navbar */
+
+    @keyframes navZoom {
+        from {
+            height: 0%;
+        }
+
+        to {
+            height: 25%;
+        }
+
+    }
+
+}

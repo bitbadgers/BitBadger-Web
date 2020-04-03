@@ -1,0 +1,114 @@
+.testimonial-container{
+    background-color: rgb(49, 49, 49);
+    color: aliceblue;
+}
+
+.testimonials{
+    display: flex;
+    padding: 70px 0 70px 0;
+    margin-left: 10%;
+
+}
+/* --- write testimonial --- */
+.write-testimonial, .testimonial{
+    height: 300;
+    background-color:  rgb(49, 49, 49);
+    width: 45%;
+    color: rgb(57, 179, 67);
+    border-radius: 20px;
+}
+.write-testimonial{
+   
+    height: 300px;
+    position: relative;
+    
+}
+
+/* --- testimonial --- */
+.testimonial{
+
+    position: relative;
+    
+}
+.profile-info{
+
+}
+.profile-photo{
+    float: left;
+    width: 100px;
+    border-radius: 50%;
+    margin-right: 40px;
+}
+
+.profile-photo img, .testimonial-photo img{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+
+.profile-info h4{
+    padding-top: 10px;
+}
+/* --- testimonials typogranphy */
+#my-testimonial, #testimonial-content{
+    background-color: rgb(73, 73, 73);
+    color: white;
+    padding: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    letter-spacing: 1.5px;
+    font-size: 22px;
+}
+#my-testimonial{
+    margin-top: 2%;
+    width: 60%;
+    border-radius: 5px;
+    height: 170px;
+    box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.3);
+    
+}
+.comment-container{
+    position: absolute;
+    width: 100%;
+    top: 21%;
+    left: 7%;
+}
+
+/* --- testimonial message ---  */
+.testimonial-photo{
+    float: left;
+    width: 100px;
+    border-radius: 50%;
+    margin-right: 40px;
+}
+/* .content-container{
+    width: 100%;
+    height: 100%;
+    border: white solid 1px;
+    
+} */
+#testimonial-content{
+    width: 80%;
+    position: absolute;
+    /* border: solid 1px white; */
+    height: 190px;
+    left: 12%;
+    top: 29%;
+    overflow: hidden;
+    background-color: #2F2F2F;
+}
+#testimonial-content a{
+    position: absolute;
+    width: 100%;
+    top: 80%;
+    left: 60%;
+    background: none;
+    color: #586AC9;
+}
+#testimonial-content a:hover{
+    color: rgb(82, 145, 63);
+}
+
+.info-2{
+    background: linear-gradient(to bottom, rgba(32,32,32,1),rgba(32,32,32, 0));
+
+}

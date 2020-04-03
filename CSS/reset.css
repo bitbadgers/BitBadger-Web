@@ -1,0 +1,36 @@
+/* This files resets the preset css attributes */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', 'sans-serif';
+}
+
+.header-bg {
+    background: url('../images/image1.jpg') no-repeat center center/cover;
+    filter: opacity(0.4);
+    height: 500px;
+}
+
+
+.container {
+    width: 95%;
+    margin: 0 auto;
+}
+
+/* -------- clear-fix -------- */
+.group:before,
+.group:after {
+    content: "";
+    display: table;
+}
+
+.group:after {
+    clear: both;
+}
+
+.group {
+    clear: both;
+    *zoom: 1;
+}
+

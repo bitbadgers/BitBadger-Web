@@ -1,0 +1,14 @@
+.primary-footer{
+background-color: #272727;
+}
+.primary-footer a{
+    display: block;
+    color: #586AC9;
+    background: none;
+}
+.primary-footer a:hover{
+    color: rgb(106, 156, 131);
+}
+.primary-footer section{
+    margin-left: 2.5%;
+}

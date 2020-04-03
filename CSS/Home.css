@@ -1,0 +1,236 @@
+body{
+    width: 100%;
+    margin: 0 auto;
+}
+/* --- header ---  */
+
+.header {
+    position: absolute;
+    display: flex;
+    margin: 0 auto;
+    padding: 30px;
+    justify-content: space-between;
+    top: 1px;
+    width: 100%;
+    background: linear-gradient(to bottom, rgba(7, 4, 4, 1), rgba(0, 0, 0, 0));
+
+}
+
+/* --- logo --- */
+
+.logo img {
+    border-radius: 50%;
+}
+
+figcaption {
+    color: #6BE476;
+}
+
+/* --- buttons --- */
+
+.btn-hero {
+    border: 1px solid #fff;
+    padding: 10px 30px;
+    text-decoration: none;
+    border-radius: 30px;
+    color: #6BE476;
+    background-color: black;
+    margin-top: 25px;
+    font-size: 20px;
+    animation: animateBtn 4s;
+}
+
+@keyframes animateBtn {
+    
+    from {
+        -webkit-transform: scale(0.5)
+    }
+
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+.btn-hero:hover {
+    background: black;
+}
+
+.btn-hero a {
+    text-decoration: none;
+    font-size: 35px;
+    letter-spacing: 0.7px;
+    font-weight: 500;
+}
+
+.btn-hero a:hover {
+    color: #cf0707;
+}
+
+/* --- info --- */
+.info {
+    background: linear-gradient(to bottom, rgba(197, 251, 212, 1), rgba(197, 251, 212, 0));
+    margin-bottom: 10px;
+}
+
+.info p {
+    text-align: center;
+    font-size: 1.5rem;
+    color: rgb(29, 29, 29);
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+/* --- wat we do --- */
+.bd {
+    
+    background: linear-gradient(to bottom, rgba(218, 222, 221, 1), rgba(217, 221, 221, 0));
+}
+
+.wat-we-do {
+    padding: 0 0 50px 20;
+    margin: 0 auto;
+}
+
+.content {
+    position: relative;
+    border: solid 1px rgb(173, 173, 173);
+    border-radius: 2%;
+    width: 55%;
+    float: left;
+    height: 350px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: x-large;
+    text-align: center;
+    padding: 50px;
+    padding-top: 20px;
+    overflow: hidden;
+    margin-left: 2%;
+
+}
+
+.content p {
+    line-height: 2rem;
+    padding-bottom: 2rem;
+}
+
+.content h3 {
+
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+aside {
+    width: 40%;
+    float: right;
+}
+
+aside img {
+    border-radius: 2%;
+}
+
+.sec-1 {
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    letter-spacing: .6px;
+    line-height: 28px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.sec-1 a {
+    text-decoration: none;
+    letter-spacing: .6px;
+    color: #6BE476;
+}
+
+/* ---- round button wat-we-do --- */
+a {
+    text-decoration: none;
+    padding: 8px 16px;
+
+}
+
+a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.previous,
+.next {
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: 45%;
+
+}
+
+#prev {
+    background-color: #6DE368;
+    color: black;
+    left: 1px;
+}
+
+#nex {
+    background-color: #6DE368;
+    color: black;
+    right: 1px;
+}
+
+#prev:hover {
+    background-color: rgb(218, 222, 221);
+}
+
+#nex:hover {
+    background-color: rgb(218, 222, 221);
+}
+
+.round {
+    border-radius: 50%;
+    font-size: 30px;
+    border: #000000 solid 1px;
+}
+
+/* --- row/sections --- */
+
+.row {
+    background-color: #000000;
+    padding-top: 44px;
+    padding-bottom: 55px;
+}
+/* --- copyright --- */
+.copyright{
+    text-align: center;
+    color: white;
+    background-color: black;
+}
+
+/* --- responsivity part  --- */
+
+@media screen and (max-width:600px) {
+    .content{
+        width: 100%;
+        margin: auto;
+    }
+    aside{
+        width: 98%;
+        border-radius: 0;
+        margin: 0 auto;
+    }
+    .hero {
+        font-size: 12px;
+        padding: 2px;
+    }
+
+    /* responsive what we do content  */
+
+    .content {
+        font-size: 12px;
+    }
+
+    /* --- sections responsivity --- */
+
+    .sec-1 {
+        display: block;
+        width: auto;
+    }
+}

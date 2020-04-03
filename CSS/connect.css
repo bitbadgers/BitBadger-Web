@@ -1,0 +1,59 @@
+.info-connect{
+    background-color: aliceblue;
+    text-align: center;
+    font-size: 3rem ;
+    padding: 10px;
+    padding-top: 0;
+    margin-top: 25px;
+    color: rgb(3, 136, 3);
+}
+.connect-container {
+    background-color: aliceblue;
+    color: rgb(8, 8, 8);
+    height: 350px;
+    position: relative;
+    text-align: center;
+    
+}
+
+.connect-container figure {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    font-weight: 800;
+    font-size: 33px;
+}
+
+.dsc {
+    top: 5%;
+    left: 30%;
+}
+
+.facebookdev {
+    top: 10%;
+    right: 22%;
+}
+
+.msp {
+    top: 60%;
+    right: 25%;
+}
+
+.shehacks {
+    top: 40%;
+    right: 44%;
+}
+
+.ibm {
+    top: 70%;
+    right: 5%;
+}
+
+.ieee {
+    top: 70%;
+    left: 33%;
+}
+
+.railsgirls {
+    top: 50%;
+}

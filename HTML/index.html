@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/reset.css">
+    <link rel="stylesheet" href="../CSS/grid.css">
+    <link rel="stylesheet" href="../CSS/Home.css">
+    <link rel="stylesheet" href="../CSS/navbar.css">
+    <link rel="stylesheet" href="../CSS/showcase.css">
+    <link rel="stylesheet" href="../CSS/howWeDo.css">
+    <link rel="stylesheet" href="../CSS/stories.css">
+    <link rel="stylesheet" href="../CSS/connect.css">
+    <link rel="stylesheet" href="../CSS/testimonial.css">
+    <link rel="stylesheet" href="../CSS/footer.css">
+    <link rel="stylesheet" href="../CSS/modallogin2.css">
+
+
+    <title>bitBadger</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/bit_badgersicon.jpg" />
+    <script type="text/javascript" src="../Javascript/index.js"></script>
+</head>
+
+<body>
+
+    <div class="header-bg group ">
+
+    </div>
+
+    <!-- header section -->
+
+    <header>
+        <div class="header">
+            <div class="logo">
+                <!-- <span class="active">bitBadgers</span> -->
+                <figure>
+                    <img src="../images/badge.png" alt="">
+                    <figcaption>bitBadgers</figcaption>
+                </figure>
+            </div>
+            <div class="navbar" id="navigate">
+                <div class="nav">
+                    <div> <a class="current" href="#"> home </a> </div>
+                    <div> <a href="#"> about </a> </div>
+                    <div class="drop">
+                        <a href="#"> Tech &#9662; </a>
+                        <div class="drop-down">
+                            <a href=""> IOT </a>
+                            <a href=""> Machine Learning</a>
+                            <a href=""> Web Development</a>
+                            <a href=""> Mobile Application</a>
+                        </div>
+                    </div>
+                    <div class="drop">
+                        <a href="#">more &#9662; </a>
+                        <div class="drop-down">
+                            <a href="">Our Meetings</a>
+                            <a href="">Our Goals</a>
+                            <a href="">Our Acheivements</a>
+                        </div>
+                    </div>
+                </div>
+                <span href="javascript:void(0);" onclick="collapser()" class="nav-icon"> &#9776; </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- The showcase -->
+
+    <section class="container">
+        <div class="showcase">
+            <h4>Bitbadgers</h4>
+            <h1>A place Where Future Developers</h1>
+            <h6>are made</h6>
+
+            <p>Every year, the university enrols over 300 students interested in technological skills. This platform
+                welcomes you
+                to find out the best path and get to listen Amazing developer stories.</p>
+
+            <button class="btn btn-hero">
+                Join as now
+            </button>
+
+            <button class="btn btn-hero" onclick="document.getElementById('id01').style.display='block'">
+                Log In
+            </button>
+
+
+            <!-- Login form -->
+
+
+            <div id="id01" class="modal-login animate">
+
+                <form class="modal-login-content " action="" method="post">
+                    <div class="box ">
+                        <h2>Log in <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                                title="Close Modal">&times;</span></h2>
+                        <div class="imgcontainer">
+
+                            <img src="../images/badge.png" alt="Avatar" class="avatar">
+                        </div>
+
+
+                        <div class="inputBox">
+                            <input type="text" name="uname" required>
+                            <label for="uname">Username</label>
+                        </div><br>
+                        <div class="inputBox">
+                            <input type="password" name="psw" required>
+                            <label for="psw">Password</label>
+                        </div>
+                        <input type="submit" name="" value="Login" class="btn-animate">
+
+                        <input type="checkbox" checked="checked" name="remember"> Remember me</input>
+                        <div class="psw"> <a href="#"> Forgot password?</a></div>
+
+
+                        <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                            class="cancelbtn"><a href="">Cancel</a></button>
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    </div>
+
+    <!-- how we do it -->
+
+    <div class="bd">
+        <!-- info -->
+        <div class="info">
+            <p>what we do</p>
+        </div>
+        <div class="wat-we-do">
+            <section class="container wat-we-do-it-child group">
+                <div class="content sec-1">
+                    <a href="/web.dev.html">
+                        <h3>Web.Dev</h3>
+                    </a>
+                    <a href="/web.dev.html">
+                        <h4>web dev community</h4>
+                    </a>
+                    <p>An ultimate guide in web development. Get familiar wuth badass upcoming and defacto web
+                        technologies.
+                        Learn from the industry and web developer gurus {WEB} </p>
+                    <a href="#" class="previous round" id="prev">&#8249;</a>
+                    <a href="#" class="next round" id="nex">&#8250;</a>
+                </div>
+
+                <aside>
+                    <figure>
+                        <img src="../images/image3.jpg" alt="boom!" width="100%">
+                        <figcaption>when your code finary works!!</figcaption>
+                    </figure>
+                </aside>
+            </section>
+        </div>
+    </div>
+    <!--teas<div class="info" style="height: 2rem;">stories</div>er-->
+    <div class="info" style="height: 2rem;">
+
+
+    </div>
+
+    <div class="grid-container">
+        <div class="how-we-do-it group">
+            <section class="h-w-it-child">
+                <p>how we do it</p>
+                <a href="#" class="open-hwt btn-animate">explore &#8250;</a>
+
+            </section>
+            <aside class="hwt-aside">
+                <p>meet our communties processes
+                    and aproaches to making
+                    to enhancing junior developer skills
+                </p>
+                <h3 class="info">code jams</h3>
+                <h3 class="info">solution challenges</h3>
+                <h3 class="info">startups</h3>
+                <h3 class="info">learning models</h3>
+                <h3 class="info">open projects</h3>
+            </aside>
+        </div>
+    </div>
+
+    <!-- srories section -->
+    <!-- info -->
+    <div class="info">
+        <p>stories</p>
+    </div>
+    
+    <div class="container">
+
+        <div class="stories group">
+            <article class="story story-a col-4">
+                <img src="../images/apple-1868496_960_720.webp" alt="story-a" width="100%" height="200px">
+               <section class="story-container">
+                <h6>my story developwer intrisic tears</h6>
+                <p> This is my story , as a developer i have been
+                    trying to code ever since i joined cumpus well
+                    its not easy haha. Like right now , I dont even know 
+                    what im trying to right. The big question remains, is it 
+                    just me or there are others like me out there ?
+                </p>
+               </section>
+                <a href="" class="readmore-story"><h4>readmore ...</h4></a>
+            </article>
+            <article class="story story-b col-4">
+                <img src="../images/children-593313__340.webp" alt="story-a" width="100%" height="200px">
+                <section class="story-container">
+                    <h6>my story developwer intrisic tears</h6>
+                    <p> This is my story , as a developer i have been
+                        trying to code ever since i joined cumpus well
+                        its not easy haha. Like right now , I dont even know 
+                        what im trying to right. The big question remains, is it 
+                        just me or there are others like me out there ?
+                    </p>
+                   </section>
+                    <a href="" class="readmore-story"><h4>readmore ...</h4></a>
+            </article>
+            <article class="story story-c col-4">
+                <img src="../images/apple-1868496_960_720.webp" alt="story-a" width="100%" height="200px">
+                <section class="story-container">
+                    <h6>my story developwer intrisic tears</h6>
+                    <p>  This is my story , as a developer i have been
+                        trying to code ever since i joined cumpus well
+                        its not easy haha. Like right now , I dont even know 
+                        what im trying to right. The big question remains, is it 
+                        just me or there are others like me out there ?
+                    </p>
+                   </section>
+                    <a href="" class="readmore-story"><h4>readmore ...</h4></a>
+
+            </article>
+        </div>
+
+        <div class="readmore">
+            <div id="story">read more</div>
+        </div>
+
+    </div>
+
+    <div class="info-connect">
+        <h5>connect</h5></div>
+    <div class="connect-container">
+        <section class="connect container">
+
+            <div class="connect-to">
+                <figure class="dev-icons dsc" >DSC K.U</figure>
+                <figure class="dev-icons msp" >MSP K.U</figure>
+                <figure class="dev-icons ieee" >IEEE Photonics</figure>
+                <figure class="dev-icons shehacks" >SHEHACKS</figure>
+                <figure class="dev-icons railsgirls" >RailsGirls</figure>
+                <figure class="dev-icons ibm" >IBM</figure>
+                <figure class="dev-icons facebookdev" >FACEBOOK.DEV</figure>
+            </div>
+        </section>
+    </div>
+
+    <!-- ******************************************************** -->
+
+    <div class="testimonial-container">
+        <div class="info info-2" style="height: 1.5rem"></div>
+
+        <section class="testimonials container">
+            
+            <section class="write-testimonial">
+                <section class="profile-info group" >
+                    <figure class="profile-photo">
+                        <img src="../images/prg.png" alt="my profile pic" width="100%">
+                    </figure>
+                    <h4 class="comment-testimonial">comment ...</h4>
+                </section>
+                <div class="comment-container"><textarea name="mytestimonial" id="my-testimonial" cols="30" rows="10" placeholder="whrite comment ..."></textarea></div>
+                
+
+            </section>
+
+            <section class="testimonial">
+                <section class="profile-info group" >
+                    <figure class="testimonial-photo">
+                        <img src="../images/prg.png" alt="my profile pic" width="100%">
+                    </figure>
+                    <h4 class="comment-testimonial">testimonial</h4>
+                </section>
+                <div class="content-container"><article id="testimonial-content" >Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                     Suscipit eveniet 
+                    consequatur facilis pariatur non
+                     quisquam, nulla minima, vero cupiditate qui, id commodi... <a href="">read more ...</a> </article></textarea></div>
+                
+            </section>
+
+        </section> 
+
+    </div>
+
+    <div class="connect">
+        
+    </div>
+
+    <div class="primary-footer group">
+        <section class="col-4 ">
+            <a href="">home</a>
+            <a href="">about</a>
+            <a href="">what we do</a>
+            <a href="">how we do it</a>
+        </section>
+        <section class="col-4 ">
+            <a href="">connect</a>
+            <a href="">DSC kenyatta Uni</a>
+            <a href="">MSP kenyatta Uni</a>
+            <a href="">ORACLE group kenyatta Uni</a>
+            <a href="">IEEE photonics</a>
+            <a href="">She Hacks kenyatta Uni</a>
+        </section>
+        <section class="col-4">
+            <a href="">contacts : +25470025555</a>
+            <a href="">email: bitbadger@google.org</a>
+            <a href="">twitter: @bitBadgers</a>
+            <a href="">medium: @bitBadgers.dev</a>
+        </section>
+        
+
+    </div>
+    
+    <div class="copyright">copyright &copy; bitBadger 2020</div>
+</body>
+
+</html> <div>
+    <section>
+        <div></div>
+    </section>
+</div>
