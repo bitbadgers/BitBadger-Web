@@ -43,6 +43,10 @@ care of its responsivity */
     padding-top: 5px;
     margin-top: 10px;
     padding-bottom: 5px;
+    transition-property: background, color, border-radius;
+    transition-duration: 0.3s, 0.1s, 1s;
+    transition-timing-function: linear, linear, linear;
+    transform-origin: left;
 }
 
 .nav a:hover {

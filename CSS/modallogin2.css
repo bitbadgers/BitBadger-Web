@@ -13,6 +13,7 @@
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.7);
     border-radius: 20px;
     animation-duration: 2s;
+    
 }
 
 
@@ -158,19 +159,26 @@
   
   /* Add Zoom Animation */
   .btn-animate:hover{
-      -webkit-animation: btn-anim 2s;
-      -moz-animation: btn-anim 2s;
-      animation: btn-anim 2s;
+      -webkit-animation: btn-anim 1s;
+      -moz-animation: btn-anim 1s;
+      animation: btn-anim 1s;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+      transition-duration: 1s;
+      animation-direction: alternate;
+      
   }
+  
   .animate {
     -webkit-animation: animatezoom 0.6s;
     animation: animatezoom 0.6s
+    
   }
   @keyframes btn-anim {
-      100%{
-        -webkit-transform: scale(1);
-        -webkit-transform: scale(1.05);
-      };
+      
+      from{-webkit-transform: scale(1)}  
+       to{ -webkit-transform: scale(0.8)}
+     
       
   }
   

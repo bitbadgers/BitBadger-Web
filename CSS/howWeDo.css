@@ -56,6 +56,9 @@
 /* --- explore btn --- */
 .open-hwt{
     background-color: rgb(72, 255, 0);
+    transition-property: background, padding;
+    transition-duration: 1s;
+    transition-timing-function: linear;
     border-radius: 50%;
     margin-left: 50px;
     color: black;
@@ -64,10 +67,9 @@
     box-shadow: 0 15px 25px rgba(0, 0, 0, .5);  
 }
 .open-hwt:hover{
-    height: 122px;
-    width: 122px;
     background-color:#586AC9;
 }
+/* --- explore transition --- */
 
 /* Responsivity */
 @media screen and (max-width: 600px){

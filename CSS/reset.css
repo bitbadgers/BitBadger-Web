@@ -4,12 +4,8 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat', 'sans-serif';
-    /* background-color: bisque; */
 }
 
-body{
-    /* background-color: beige; */
-}
 .header-bg {
     background: url('../images/image1.jpg') no-repeat center center/cover;
     filter: opacity(0.4);
@@ -38,7 +34,3 @@ body{
     *zoom: 1;
 }
 
-section.container {
-    margin: 0;
-    padding: 0;
-}

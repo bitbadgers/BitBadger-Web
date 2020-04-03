@@ -1,0 +1,76 @@
+/* --- stories col-4 --- */
+.col-4{
+    width: 30%;
+}
+
+/* --- stories container --- */
+.stories{
+ height: 100%;
+ padding-top: 20px;
+ padding-bottom: 20px;
+}
+
+/* --- individual stories --- */
+.story{
+    border: solid 1px rgb(41, 41, 41);
+    border-radius: 20px;
+    height: 400px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, .5); 
+    padding: 0;
+    overflow: hidden;
+}
+
+.story-b, .story-c{
+   margin-left: 5%;
+}
+
+.story-b{
+    margin-top: 5%;
+}
+/* --- read more --- */
+.readmore{
+    text-align: center;
+    margin-left: 48%;
+}
+#rounds{
+    padding-top: 40px;
+    padding-bottom: 38px;
+    border-radius: 50%;
+    background-color:  rgb(72, 255, 0);
+    transition-property: background;
+    transition-duration: 1s;
+    transition-timing-function: linear;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .5);  
+    color: black;
+}
+/* check this part minify */
+.readmore #rounds:hover{
+    background-color:#586AC9;
+    cursor: pointer;
+}
+.readmore div{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+.readmore a{
+    width: 100px;
+}
+.readmore a:hover{
+    width: 100px;
+    background: none;
+}
+/* --- story container --- */
+.story-container{
+
+    padding: 10px;
+
+    /* border: solid 1px black; */
+}
+.story-container h6{
+    font-size: 14px;
+    padding: 3px 0 10px 0;
+}
+.readmore-story{
+    float: right;
+}
