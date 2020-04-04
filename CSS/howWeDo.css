@@ -55,9 +55,9 @@
 
 /* --- explore btn --- */
 .open-hwt{
-    background-color: rgb(72, 255, 0);
+    background-color: #75C96B;
     transition-property: background, padding;
-    transition-duration: 1s;
+    transition-duration: 1ms;
     transition-timing-function: linear;
     border-radius: 50%;
     margin-left: 50px;
