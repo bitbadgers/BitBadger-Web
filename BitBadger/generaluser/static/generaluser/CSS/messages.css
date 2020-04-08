@@ -1,0 +1,41 @@
+.messages{
+
+    font-size: 20px;
+    position: fixed;
+    right: 20px;
+    top: 100px;
+    transition-delay: 1s;
+    animation: animateMessage 5s;
+    animation-delay: 0.2s;
+    transform: scale(0);
+}
+
+@keyframes animateMessage{
+    0%{
+        transform: scale(0);
+        top: 2px;
+    }
+    20%{
+        transform: scale(1);
+        top: 100px;
+    }
+    90%{
+        transform: scale(1);
+        top: 100px;
+    }
+    100%{
+        transform: scale(0);
+        top: 2px;
+    }
+}
+.messages * {
+    list-style-type: none;
+    padding: 5px;
+    border-radius: 5px;
+    padding: 0px 10px 0px 10px;
+    background-color: blue;
+    color: white;
+}
+.error{
+    background-color: red;
+}

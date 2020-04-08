@@ -10,10 +10,10 @@ window.onclick = function (event) {
 function collapser() {
     var x = document.getElementById("navigate");
     if (x.className === "navbar") {
-        document.getElementById("this").innerHTML = "&times;"
+        document.getElementById("to-cancel").innerHTML = "&times;"
         x.className += "-clicked";
     } else {
-        document.getElementById("this").innerHTML = "&9776;"
+        document.getElementById("to-cancel").innerHTML = "&#9776;"
         x.className = "navbar";
     }
 }

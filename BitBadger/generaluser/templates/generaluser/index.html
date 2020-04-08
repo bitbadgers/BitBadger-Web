@@ -5,23 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
-    <link rel="stylesheet" href= {% static 'generaluser/CSS/reset.css' %}>
+    <link rel="stylesheet" href={% static 'generaluser/CSS/reset.css' %}>
     <link rel="stylesheet" href={% static 'generaluser/CSS/grid.css' %}>
     <link rel="stylesheet" href={% static 'generaluser/CSS/Home.css' %}>
-    <link rel="stylesheet" href={%static 'generaluser/CSS/navbar.css' %}>
-    <link rel="stylesheet" href={%static 'generaluser/CSS/showcase.css' %}>
-    <link rel="stylesheet" href={%static 'generaluser/CSS/howWeDo.css' %}>
-    <link rel="stylesheet" href={%static 'generaluser/CSS/stories.css' %}>
-    <link rel="stylesheet" href={%static 'generaluser/CSS/connect.css' %}>
-    <link rel="stylesheet" href={%static 'generaluser/CSS/testimonial.css' %}>
-    <link rel="stylesheet" href={%static 'generaluser/CSS/footer.css' %}>
-    <link rel="stylesheet" href={%static 'generaluser/CSS/modallogin2.css' %}>
+    <link rel="stylesheet" href={% static 'generaluser/CSS/navbar.css' %}>
+    <link rel="stylesheet" href={% static 'generaluser/CSS/showcase.css' %}>
+    <link rel="stylesheet" href={% static 'generaluser/CSS/howWeDo.css' %}>
+    <link rel="stylesheet" href={% static 'generaluser/CSS/stories.css' %}>
+    <link rel="stylesheet" href={% static 'generaluser/CSS/connect.css' %}>
+    <link rel="stylesheet" href={% static 'generaluser/CSS/testimonial.css' %}>
+    <link rel="stylesheet" href={% static 'generaluser/CSS/footer.css' %}>
+    <link rel="stylesheet" href={% static 'generaluser/CSS/modallogin2.css' %}>
+    <link rel="stylesheet" href={% static 'generaluser/CSS/messages.css' %}>
 
 
     <title>bitBadger</title>
     <link rel="shortcut icon" type="image/x-icon" href={% static 'generaluser/images/bit_badgersicon.jpg' %} />
 </head>
-
 <body>
 
     <div class="header-bg group ">
@@ -64,7 +64,16 @@
                         </div>
                     </div>
                 </div>
-                <span href="javascript:void(0);" onclick="collapser()" class="nav-icon"> &#9776; </span>
+                <span href="javascript:void(0);" onclick="collapser()" class="nav-icon"> <span id="to-cancel"> &#9776;
+                    </span> </span>
+
+                {% if user %}
+                <form action="logout" method = "POST" class = "login-info">
+                    {% csrf_token %}
+                    <span> Logged as <span class="logged-name"> {{user}} </span> </span>
+                    <input type="submit" value = "logout" class = "logout-btn">
+                </form>
+                {% endif %}
             </div>
         </div>
     </header>
@@ -81,13 +90,15 @@
                 welcomes you
                 to find out the best path and get to listen Amazing developer stories.</p>
 
-            <button class="btn btn-hero" onclick="document.getElementById('id02').style.display='block'" >
-                Join as now
-            </button>
+            {% if not user %}
+                <button class="btn btn-hero" onclick="document.getElementById('id02').style.display='block'">
+                    Join as now
+                </button>
 
-            <button class="btn btn-hero" onclick="document.getElementById('id01').style.display='block'">
-                Log In
-            </button>
+                <button class="btn btn-hero" onclick="document.getElementById('id01').style.display='block'">
+                    Log In
+                </button>
+            {% endif %}
 
 
             <!-- Login form -->
@@ -126,33 +137,45 @@
                 </form>
             </div>
 
-            {% comment %} user registration form {% endcomment %}
-            
-            {% block content %}
-                <div id="id02" class="modal-login animate">
-                    <form action = "regiser", method  = "post" class="modal-login-content">
-                        {% csrf_token %}
-                        <div class = "box">
-                            <h2>Register <span onclick="document.getElementById('id02').style.display='none'" class="close"
-                                    title="Close Modal">&times;</span></h2>
+            {% if messages %}
+            <ul class="messages" data-dismiss="alert">
+                {% for message in messages %}
+                <li class="{{ message.tags }}">
+                    {{ message }}
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
 
-                            <div class="inputBox">
-                                {{ registrationform.username }}
-                                <label>Username</label>
-                            </div><br>
-                            <div class="inputBox">
-                                {{ registrationform.password1 }}
-                                <label> Password </label>
-                            </div><br>
-                            <div class="inputBox">
-                                {{ registrationform.password2 }}
-                                <label> Confirm Password </label>
-                            </div>                      
-                            
-                            <input type = "submit" value = "Register" >
+            {% comment %} user registration form {% endcomment %}
+
+            {% block registrationform %}
+            <div id="id02" class="modal-login animate">
+                <form action="register" , method="post" class="modal-login-content">
+                    {% csrf_token %}
+                    <div class="box">
+                        <h2>Register <span onclick="document.getElementById('id02').style.display='none'" class="close"
+                                title="Close Modal">&times;</span></h2>
+
+                        <div class="inputBox">
+                            {{ registrationform.username }}
+                            <label>Username</label>
+                        </div><br>
+                        <div class="inputBox">
+                            {{ registrationform.password1 }}
+                            <label> Password </label>
+                        </div><br>
+                        <div class="inputBox">
+                            {{ registrationform.password2 }}
+                            <label> Confirm Password </label>
                         </div>
-                    </form>
-                </div>
+
+                        <input type="submit" value="Register">
+                        <button type="button" onclick="document.getElementById('id02').style.display='none'"
+                            class="cancelbtn"><a href="">Cancel</a></button>
+                    </div>
+                </form>
+            </div>
             {% endblock %}
 
         </div>
@@ -223,54 +246,65 @@
     <div class="info">
         <p>stories</p>
     </div>
-    
+
     <div class="container">
 
         <div class="stories group">
             <article class="story story-a col-4">
-                <img src={% static 'generaluser/images/apple-1868496_960_720.webp' %} alt="story-a" width="100%" height="200px">
-               <section class="story-container">
-                <h6>my story developwer intrisic tears</h6>
-                <p>  This is my story , as a developer i have been
-                    trying to code ever since i joined cumpus well
-                    its not easy haha. Like right now , I dont even know 
-                    what im trying to write. The big question remains, is it 
-                    just me or there are others like me out there ?
-                </p>
-               </section>
-                <a href="" class="readmore-story"><h4>readmore ...</h4></a>
+                <img src={% static 'generaluser/images/apple-1868496_960_720.webp' %} alt="story-a" width="100%"
+                    height="200px">
+                <section class="story-container">
+                    <h6>my story developwer intrisic tears</h6>
+                    <p> This is my story , as a developer i have been
+                        trying to code ever since i joined cumpus well
+                        its not easy haha. Like right now , I dont even know
+                        what im trying to write. The big question remains, is it
+                        just me or there are others like me out there ?
+                    </p>
+                </section>
+                <a href="" class="readmore-story">
+                    <h4>readmore ...</h4>
+                </a>
             </article>
             <article class="story story-b col-4">
-                <img src={% static 'generaluser/images/children-593313__340.webp' %} alt="story-a" width="100%" height="200px">
+                <img src={% static 'generaluser/images/children-593313__340.webp' %} alt="story-a" width="100%"
+                    height="200px">
                 <section class="story-container">
                     <h6>my story developwer intrisic tears</h6>
-                    <p>  This is my story , as a developer i have been
+                    <p> This is my story , as a developer i have been
                         trying to code ever since i joined cumpus well
-                        its not easy haha. Like right now , I dont even know 
-                        what im trying to write. The big question remains, is it 
+                        its not easy haha. Like right now , I dont even know
+                        what im trying to write. The big question remains, is it
                         just me or there are others like me out there ?
                     </p>
-                   </section>
-                    <a href="" class="readmore-story"><h4>readmore ...</h4></a>
+                </section>
+                <a href="" class="readmore-story">
+                    <h4>readmore ...</h4>
+                </a>
             </article>
             <article class="story story-c col-4">
-                <img src={% static 'generaluser/images/apple-1868496_960_720.webp' %} alt="story-a" width="100%" height="200px">
+                <img src={% static 'generaluser/images/apple-1868496_960_720.webp' %} alt="story-a" width="100%"
+                    height="200px">
                 <section class="story-container">
                     <h6>my story developwer intrisic tears</h6>
-                    <p>  This is my story , as a developer i have been
+                    <p> This is my story , as a developer i have been
                         trying to code ever since i joined cumpus well
-                        its not easy haha. Like right now , I dont even know 
-                        what im trying to write. The big question remains, is it 
+                        its not easy haha. Like right now , I dont even know
+                        what im trying to write. The big question remains, is it
                         just me or there are others like me out there ?
                     </p>
-                   </section>
-                    <a href="" class="readmore-story"><h4>readmore ...</h4></a>
+                </section>
+                <a href="" class="readmore-story">
+                    <h4>readmore ...</h4>
+                </a>
 
             </article>
         </div>
 
         <div class="readmore">
-            <a href=""><div id="story">read more stories ...</div></a>
+            <a href="">
+                <div id="story">read more stories ...</div>
+            </a>
         </div>
 
     </div>
@@ -298,39 +332,43 @@
         <div class="info info-2" style="height: 1.5rem"></div>
 
         <section class="testimonials container">
-            
+
             <section class="write-testimonial">
-                <section class="profile-info group" >
+                <section class="profile-info group">
                     <figure class="profile-photo">
                         <img src={% static 'generaluser/images/prg.png' %} alt="my profile pic" width="100%">
                     </figure>
                     <h4 class="comment-testimonial">comment ...</h4>
                 </section>
-                <div class="comment-container"><textarea name="mytestimonial" id="my-testimonial" cols="30" rows="10" placeholder="whrite comment ..."></textarea></div>
-                
+                <div class="comment-container"><textarea name="mytestimonial" id="my-testimonial" cols="30" rows="10"
+                        placeholder="whrite comment ..."></textarea></div>
+
 
             </section>
 
             <section class="testimonial">
-                <section class="profile-info group" >
+                <section class="profile-info group">
                     <figure class="testimonial-photo">
                         <img src={% static 'generaluser/images/prg.png' %} alt="my profile pic" width="100%">
                     </figure>
                     <h4 class="comment-testimonial">testimonial</h4>
                 </section>
-                <div class="content-container"><article id="testimonial-content" >Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                     Suscipit eveniet 
-                    consequatur facilis pariatur non
-                     quisquam, nulla minima, vero cupiditate qui, id commodi... <a href="">read more ...</a> </article></textarea></div>
-                
+                <div class="content-container">
+                    <article id="testimonial-content">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Suscipit eveniet
+                        consequatur facilis pariatur non
+                        quisquam, nulla minima, vero cupiditate qui, id commodi... <a href="">read more ...</a>
+                    </article></textarea>
+                </div>
+
             </section>
 
-        </section> 
+        </section>
 
     </div>
 
     <div class="connect">
-        
+
     </div>
 
     <div class="primary-footer group">
@@ -354,10 +392,10 @@
             <a href="">twitter: @bitBadgers</a>
             <a href="">medium: @bitBadgers.dev</a>
         </section>
-        
+
 
     </div>
-    
+
     <div class="copyright">copyright &copy; bitBadger 2020</div>
 
     <script type="text/javascript" src={% static 'generaluser/Javascript/index.js' %}></script>
