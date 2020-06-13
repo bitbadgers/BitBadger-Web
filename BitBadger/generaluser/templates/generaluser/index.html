@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% spaceless %}
 <html lang="en">
 
 <head>
@@ -115,8 +116,6 @@
 
                             <img src={% static 'generaluser/images/badge.png' %} alt="Avatar" class="avatar">
                         </div>
-
-
                         <div class="inputBox">
                             {{ loginform.username }}
                             <label for="uname">Username</label>
@@ -400,3 +399,4 @@
 
     <script type="text/javascript" src={% static 'generaluser/Javascript/index.js' %}></script>
 </body>
+{% endspaceless %}
