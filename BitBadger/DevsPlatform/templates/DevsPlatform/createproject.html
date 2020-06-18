@@ -1,0 +1,16 @@
+{% extends 'DevsPlatform/base.html' %}
+{% block content %}
+  <div class = create-project>
+      <form action="{% url 'create-project' %}">
+          <table>
+            <caption>Create a New Project</caption>
+            {{ create_project_form}}
+            <td></td>
+            <td>
+                <button type = "submit">Submit</button>
+            </td>
+          </table>
+          
+      </form>
+  </div>
+{% endblock content %}

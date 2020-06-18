@@ -49,10 +49,9 @@
                     <div class="drop">
                         <a href="#"> Tech &#9662; </a>
                         <div class="drop-down">
-                            <a href=""> IOT </a>
-                            <a href=""> Machine Learning</a>
-                            <a href=""> Web Development</a>
-                            <a href=""> Mobile Application</a>
+                            {% for field in  fields_of_specialisation%}
+                                <a href=""> {{ field }} </a>
+                            {% endfor %}
                         </div>
                     </div>
                     <div class="drop">

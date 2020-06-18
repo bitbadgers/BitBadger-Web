@@ -1,11 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .loginform import login
 from django.http import HttpResponse, HttpResponseRedirect
-from loggeduser.models import UserDetails
+# from loggeduser.models import UserDetails
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib import messages
 from django.contrib import sessions
+
+from DevsPlatform.models import FieldsOfSpecialisation
 
 def index(request):
     if request.method  == 'POST':
@@ -17,9 +19,10 @@ def index(request):
             print(user)
             if user is not None:
                 login(request, user)
-                request.session['username'] = username
+                # request.session['username'] = username
+                request.session['context'] = {}
                 messages.success(request, 'Successifully logged in!')
-                return HttpResponseRedirect('')
+                return redirect('login-home')
             else:
                 messages.error(request, "Invalid login!")
                 return HttpResponseRedirect('')
@@ -31,7 +34,8 @@ def index(request):
     context = {
         'loginform' : loginform,
         'registrationform' : registerform,
-        'user' : request.session.get('username')
+        'user' : request.session.get('username'),
+        'fields_of_specialisation' : FieldsOfSpecialisation.objects.all(),
     }
     return render(request, 'generaluser/index.html', context)
 
@@ -49,9 +53,3 @@ def registeruser(request):
         messages.error(request, "Password do not meet qualification")
         return HttpResponseRedirect('/')
 
-def logoutUser(request):
-    if request.method == "POST":
-        logout(request)
-        messages.info(request, "logged out successfully !")
-        return HttpResponseRedirect('/')
-# Create your views here.

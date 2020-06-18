@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+{% spaceless %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'DevsPlatform/CSS/LoginHome.css' %}">
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <header class="logged-header">
+        <section class="header-logo">
+            <section class="logo-container">
+                <div>
+                    <h3>BitBadgers</h3>
+                    <img src="{% static 'generaluser/images/bit_badgersicon.jpg' %}" width=100 alt="Logo">
+                    <h4><i>Let's code it</i></h4>
+                </div>
+            </section>
+            <section>
+
+            </section>
+        </section>
+        <section class="in-header-user-details">
+            <h4 class="welcome-note"> Welcome: <span style="color: blue">{{ user }}</span> </h4>
+            <a href="{% url 'logout' %}"><button>Logout</button></a>
+        </section>
+    </header>
+    <div class="content">
+
+        <div class="left-nav">
+            <!-- completed projects -->
+            <fieldset>
+                <legend>Projects</legend>
+                {% if user_completed_projects or user_current_projects%}
+                    <button style="float:right;" id="view-older-projects">View older projects </button>
+                    {% if user_completed_projects %}
+                        <fieldset id="old-projects" style="display: none;">
+                            <h3><u>My completed Projects </u></h3>
+                            <ul>
+                                {% for project in user_completed_projects %}
+                                <li>
+                                    <div>{{ forloop.counter }}.</div>
+                                    <div><a href="">{{ project.project }}</a> ended on {{ project.project.project_end }}</div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </fieldset>
+                    {% endif %}
+                    <!-- current projects -->
+                    {% if user_current_projects%}
+                        <fieldset>
+                            <h3><u>My Current Projects </u></h3>
+                            <ul>
+                                {% for project in user_current_projects %}
+                                <li>
+                                    <div>{{ forloop.counter }}.</div>
+                                    <div><a href="">{{ project.project }}</a> from {{ project.project.project_start }} to
+                                        {{ project.project.project_end }}</div>
+                                </li>
+                                {% endfor %}
+
+                            </ul>
+                        </fieldset>
+                    {% endif %}
+                {% endif %}
+                <fieldset>
+                    <ul>
+                        <li>
+                            <a href="{% url 'create-project' %}">Create a project </a>
+                        </li>
+                        <li>
+                            <a href="">Join a project </a>
+                        </li>
+                    </ul>
+                </fieldset>
+            </fieldset>
+
+            {% if user_teams %}
+            <fieldset>
+                <legend> My Teams </legend>
+                <ul>
+                    {% for team in user_teams %}
+                    <li>
+                        <div>{{ forloop.counter }}.</div>
+                        <div>
+                            <a href="">{{ team.team.team_name }}</a> </a>
+                            {% if team.team.goal %}
+                            Aim: {{ team.team.goal }}
+                            {% endif %}
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <a href="">Create a new team</a>
+            </fieldset>
+
+            {% endif %}
+
+        </div>
+        <div class="main-content">
+            {% block content %}
+
+            {% endblock content %}
+        </div>
+
+        <!-- The right navigation -->
+        <div class="right-nav">
+            <!--User Specialisation Fields -->
+            <fieldset>
+                <legend>Areas of Specialisation</legend>
+
+                <ul>
+                    {% for field in user_fields %}
+                    <li>
+                        <div>{{forloop.counter}}.</div>
+                        <div><a href="">{{ field.Area_Of_Specialisation }}</a></div>
+                    </li>
+                    {% endfor %}
+                    <li>
+                        
+                        <form action='{% url "login-home" %}' method="POST">
+                            {% csrf_token %}
+                            {% for field in user_specialisation_form %}
+                            {{field}}
+                            {% endfor %}
+                            <input type="submit" value="Add">
+                        </form>
+                    </li>
+                </ul>
+                {% if messages %}
+                <ul class="messages" data-dismiss="alert">
+                    {% for message in messages %}
+                    <li class="{{ message.tags }}">
+                        {{ message }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </fieldset>
+
+            <!-- Upcoming events -->
+            {% if upcoming_events %}
+            <fieldset>
+                <legend>Upcoming Events</legend>
+
+                <ol>
+                    {% for event in upcoming_events %}
+                    <li>
+                        <div>{{ forloop.counter }}.</div>
+                        <div>{{ event.event_name }} on {{ event.sheduled_date }} from {{ event.sheduled_time }}</div>
+                    </li>
+                    {% endfor %}
+                </ol>
+            </fieldset>
+            {% endif %}
+        </div>
+    </div>
+    <footer>
+
+    </footer>
+
+    <script type="text/javascript" src="{% static 'DevsPlatform/JS/main.js' %}"></script>
+</body>
+{% endspaceless %}
+
+</html>
