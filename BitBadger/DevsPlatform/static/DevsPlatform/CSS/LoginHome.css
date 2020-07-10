@@ -1,19 +1,20 @@
-
-/* @import url(fonts.css); */
 *{
     padding:0px;
     margin:0px;
-    font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;;
+    font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+    font-size: 13.5px;
 }
 body{
     background: linear-gradient(to bottom, rgba(197, 251, 212, 1), rgba(197, 251, 212, 0));
 }
-a:hover{
+a:hover,
+.btn-link:hover{
     color:red;
+    
 }
-/* a:visited{
-    color:orange;
-} */
+.btn-link{
+    padding: 2px;
+}
 a:visited:hover{
     color:red;
 }
@@ -21,6 +22,8 @@ header{
     background: rgb(0, 4, 10);
     color: white;
     display: flex;
+    height: 150px;
+    overflow: hidden;
 }
 .header-logo{
     width: 80%;
@@ -54,10 +57,14 @@ header .welcome-note{
     width:60%;
     height: 500px;
     overflow-y: auto;
+    overflow-x:hidden;
 }
 .right-nav{
     width:19%;
     margin-right: 1%;
+}
+.form-control{
+    color: red;
 }
 
 fieldset {
@@ -65,6 +72,11 @@ fieldset {
     background: rgba(197, 251, 212, 1);
     width: 100%;
     margin-bottom: 5px;
+}
+
+fieldset fieldset{
+    padding-top: 2px;
+    margin: 0px;
 }
 
 fieldset legend{
@@ -81,46 +93,152 @@ fieldset legend{
 
 }
 
+fieldset fieldset h3{
+    margin: 0px;
+    padding: 1px;
+}
+
 fieldset ul {
     list-style-type: none;
     color: black;
     font-weight: 500;
+    width: 100%;
 }
 fieldset li{
-    padding: 2px;
+    /* padding: 2px; */
     display: flex;
+    padding: 1px;
 }
-fieldset li div{
+fieldset .btn-link{
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+fieldset numbered div{
     width: 92%;
 }
-fieldset li div:first-child{
+fieldset .numbered div:first-child{
     width: 8%;
 }
-#view-older-projects{
-    background: none;
-    color: blue;
-    border:none;
-    outline: 0px;
-    text-decoration: underline;
+
+fieldset dt{
+    font-weight: normal;
 }
 
-#view-older-projects:hover{
-    color:red;
+button[type = 'submit'],
+input[type = 'submit']{
+    padding: 2px 4px 2px 4px;
 }
 
+select{
+    width:auto;
+    font-weight: 500;
+    /* font-size: 15px; */
+}
+
+.collapse{
+    width: 100%;
+}
 /*====================== Style messages ======================================*/
 .messages{
     position: fixed;
-    top:10px;
     right: 20px;
+    animation: messages-animate 7s linear;
+    animation-delay: 0.2s;
+    transform: scale(0);
+    list-style-type: none;
+    z-index: 5;
 }
+
+.messages .says{
+    margin-bottom:0px;
+    padding-bottom: 0px;
+    position:relative;
+    top:30px;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.messages .error-say{
+    color: red;
+}
+
+.messages .success-say{
+    color: blue;
+}
+
+.messages li{
+    border-radius: 10px;
+    padding:10px;
+    width:auto;
+    color: white;
+}
+
 .messages .error{
     background-color: red;
 }
 .messages .success{
     background-color: blue;
 }
-/* ================ Style for createproject.html ============================= */
+
+@keyframes messages-animate{
+    1%{
+        transform: scale(1);
+        top: 10px;
+    }
+    20%{
+        top: 100px;
+    }
+    95%{
+        top : 100px;
+        transform: scale(1);
+    }
+    100%{
+        top: 80px;
+        transform: scale(0);
+    }
+}
+/*============================ Icons ==========================================*/
+
+/* ================== Styling all details pages ========================================= */
+.details table{
+    margin: auto;
+    font-size: 16px;
+}
+.details table caption{
+    font-size: 25px;
+    font-weight: bold;
+    text-decoration: underline;
+    margin: auto;
+    text-align: center;
+}
+.details table tr th{
+    text-align: left;
+}
+.details table tr td,
+.details table tr th{
+    font-size: 15px;
+    padding:10px;
+    vertical-align: top;
+}
+
+.details table tr td ul{
+    list-style-type: none;
+}
+
+.details table tr td table tr td{
+    padding: 2px;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.details table tr td table tr td a{
+    text-decoration: none;
+}
+
+.details table tr td table tr td a .delete-icon{
+    font-size: 16px;
+}
+/* ================ Style for all creation and update forms ============================= */
 
 form table{
     text-align: left;
@@ -146,9 +264,9 @@ form table select{
     line-height: 25px;
     width: 250px;
     font-size: 16px;
-    /* border-bottom: 1.5px black solid; */
+    border-bottom: 1.5px black solid;
     
-}
+} 
 
 form table button[type = 'submit']{
     line-height: 25px;
@@ -169,4 +287,40 @@ form table button[type = 'submit']:hover{
     background: white;
     color: blue;
     transform: scale(1.05);
+}
+
+/*======================= Special tables ================================*/
+/* .add-participant-form .one-line{
+    width: 100px;
+} */
+.one-line{
+    display: flex;
+    margin-left: 0px;;
+}
+
+.details .members-table tr{
+    padding: 1px;
+}
+.details .members-table td,
+.details .members-table th{
+    padding: 2px;
+}
+.details .members-table th{
+    font-weight: 550;
+}
+
+.details .title-holder{
+    background-color: blue;
+    border-radius: 5px;
+    text-align: center;
+    padding:0px;
+    margin-bottom: opx;
+}
+.details .title{
+    color: rgba(255, 255, 255, 0.8);
+    padding:5px;
+}
+
+#id_team{
+    width:150px;
 }

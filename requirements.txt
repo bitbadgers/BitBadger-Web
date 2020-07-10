@@ -1,0 +1,5 @@
+django -> Python,
+channels -> Python
+redis -> system,
+docker -> system,
+chromedriver -> system

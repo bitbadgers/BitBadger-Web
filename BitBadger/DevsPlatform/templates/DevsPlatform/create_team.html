@@ -1,0 +1,16 @@
+{% extends "DevsPlatform/base.html" %}
+{% block content %}
+  <div class = "create-team-form forms">
+    <form action="{% url 'DevsPlatform:create-team' %}" method = 'POST'>
+        {% csrf_token %}
+        <table>
+            <caption>Create a new Team </caption>
+            {{ create_team_form }}
+            <td></td>
+            <td>
+                <button type = 'submit'> Create </button>
+            </td>
+        </table>
+    </form>
+  </div>
+{% endblock content %}

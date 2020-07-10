@@ -36,10 +36,17 @@ class DevelopmentApproach(models.Model):
 class Project(models.Model):
     project_name = models.CharField(max_length=50)
     project_field = models.ForeignKey("FieldsOfSpecialisation", on_delete=models.CASCADE)
-    project_start = models.DateField(("Start time"), auto_now = False, auto_now_add=False)
-    project_end = models.DateField(("Completion Time"), auto_now = False, auto_now_add=False)
+    project_start = models.DateField(("Start Date"), auto_now = False, auto_now_add=False)
+    project_end = models.DateField(("Completion Date"), auto_now = False, auto_now_add=False)
     project_aproach = models.ForeignKey("DevelopmentApproach", verbose_name=("Development Approach"), on_delete=models.CASCADE, null = True, blank = True)
     project_head = models.ForeignKey(User, on_delete=models.CASCADE)
+    ADD = [
+        (1,"Only Head can add participants"),
+        (2,"Request first b4 joining"),
+        (3,"Free join")
+    ]
+    add_priviledge = models.IntegerField("Joining priviledge", choices = ADD, default = 3)
+    maximum_members = models.IntegerField(default = 20)
     
     def __str__(self):
         return self.project_name
@@ -48,8 +55,9 @@ class Team(models.Model):
     team_name = models.CharField(max_length=50, unique = True)
     team_field = models.ForeignKey("FieldsOfSpecialisation", on_delete = models.CASCADE)
     date_of_creation = models.DateField(auto_now=True, auto_now_add=False)
-    goal = models.CharField(max_length=50, null = True, blank = True)
+    goal = models.CharField(verbose_name = "Team Goal", max_length=50, null = True, blank = True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, default = None )
+    max_number = models.IntegerField(("Maximum number"), default = 20)
     
     def __str__(self):
         return self.team_name
@@ -58,14 +66,14 @@ class TeamMember(models.Model):
     member_name = models.ForeignKey(User, on_delete=models.CASCADE)
     team = models.ForeignKey("Team", on_delete=models.CASCADE)
     MEMBER_ROLES = [
-        (1,'Chair'),
-        (2,'Vice-Chair'),
-        (3,'Secretary'),
-        (4,'Vice-Secretary'),
-        (4,'Treasurer'),
-        (5,'Other')
+        ('Chair','Chair'),
+        ('Vice-Chair','Vice-Chair'),
+        ('Secretary','Secretary'),
+        ('Vice-Secretary','Vice-Secretary'),
+        ('Vice-Secretary','Treasurer'),
+        (None, 'None')
     ]
-    member_role = models.IntegerField(choices = MEMBER_ROLES)
+    member_role = models.CharField(choices = MEMBER_ROLES, default = None, null = True, blank = True, max_length = 20)
 
     class Meta:
         unique_together = [('member_name','team')]

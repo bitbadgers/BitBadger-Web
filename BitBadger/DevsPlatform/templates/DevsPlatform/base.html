@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-{% spaceless %}
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
+
+    <link rel="stylesheet" href="{% static 'DevsPlatform/CSS/strap/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'DevsPlatform/CSS/LoginHome.css' %}">
+    {% block morecss %}
+      
+    {% endblock morecss %}
     <title>Dashboard</title>
+
 </head>
 
 <body>
+
+    <!-- The header -->
+
     <header class="logged-header">
         <section class="header-logo">
             <section class="logo-container">
@@ -25,82 +33,197 @@
             </section>
         </section>
         <section class="in-header-user-details">
-            <h4 class="welcome-note"> Welcome: <span style="color: blue">{{ user }}</span> </h4>
-            <a href="{% url 'logout' %}"><button>Logout</button></a>
+            <h4 class="welcome-note"> Welcome: <span style="color: blue"><span
+                        class="glyphicon glyphicon-user"></span>{{ user }}</span> </h4>
+            <a href="{% url 'DevsPlatform:logout' %}"><button class="btn btn-primary">Logout</button></a>
         </section>
+
+        {% if messages %}
+            <ul class="messages" data-dismiss="alert" >
+                {% for message in messages %}
+                <span class="says {{ message.tags}}-say"> &#9206;</span>
+                <li class="{{ message.tags }}">
+                    {{ message }}
+                </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
     </header>
     <div class="content">
 
+        <!-- Left Navigation -->
+
         <div class="left-nav">
-            <!-- completed projects -->
+
+            <!-- All projects -->
+
             <fieldset>
                 <legend>Projects</legend>
                 {% if user_completed_projects or user_current_projects%}
-                    <button style="float:right;" id="view-older-projects">View older projects </button>
-                    {% if user_completed_projects %}
-                        <fieldset id="old-projects" style="display: none;">
-                            <h3><u>My completed Projects </u></h3>
-                            <ul>
-                                {% for project in user_completed_projects %}
-                                <li>
-                                    <div>{{ forloop.counter }}.</div>
-                                    <div><a href="">{{ project.project }}</a> ended on {{ project.project.project_end }}</div>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                        </fieldset>
-                    {% endif %}
-                    <!-- current projects -->
-                    {% if user_current_projects%}
-                        <fieldset>
-                            <h3><u>My Current Projects </u></h3>
-                            <ul>
-                                {% for project in user_current_projects %}
-                                <li>
-                                    <div>{{ forloop.counter }}.</div>
-                                    <div><a href="">{{ project.project }}</a> from {{ project.project.project_start }} to
-                                        {{ project.project.project_end }}</div>
-                                </li>
-                                {% endfor %}
 
-                            </ul>
-                        </fieldset>
-                    {% endif %}
+                <!-- Collapsable completed projects -->
+
+                <button class="btn btn-link" data-target="#older-projects-collapse" data-toggle="collapse"
+                    aria-expanded="false" aria-controls="older-projects-collapse">View older projects</button><!--Bootstrap collapse button-->
+                
+                {% if user_completed_projects %}
+
+                <div id="older-projects-collapse" class="collapse">
+                    <fieldset id="old-projects">
+                        <h3><u>My completed Projects </u></h3>
+                        <ul>
+                            {% for project in user_completed_projects %}
+                            <li>
+                                <div>{{ forloop.counter }}.</div>
+                                <div><a href="">{{ project.project }}</a> ended on {{ project.project.project_end }}
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </fieldset>
+                </div>
+
+                {% endif %}
+
+                <!-- current projects -->
+
+                {% if user_current_projects%}
+                <fieldset>
+                    <h3><u>My Current Projects </u></h3>
+                    <ul class = "numbered">
+                        {% for project in user_current_projects %}
+                        <li>
+                            <div>{{ forloop.counter }}.</div>
+                            <div><a
+                                    href="{% url 'DevsPlatform:project-detail-view' project.project.id %}">{{ project.project }}</a>
+                                from {{ project.project.project_start }} to
+                                {{ project.project.project_end }}</div>
+                        </li>
+                        {% endfor %}
+
+                    </ul>
+                </fieldset>
+                {% endif %}
                 {% endif %}
                 <fieldset>
                     <ul>
+
+                        <!-- Create project link -->
+
                         <li>
-                            <a href="{% url 'create-project' %}">Create a project </a>
+                            <a href="{% url 'DevsPlatform:create-project' %}">Create a project </a>
                         </li>
+
+                        <!-- Collapsable view all projects -->
+
                         <li>
-                            <a href="">Join a project </a>
+                            <ul>
+                                <li>
+                                    {% block view_project_collapse_link %}
+                                    <div>
+                                        <button class="btn btn-link" data-target="#all-project-collapse"
+                                            data-toggle="collapse" aria-expanded="false"
+                                            aria-controls="all-project-collapse">View all active loprojects</button>
+                                    </div>
+                                    {% endblock view_project_collapse_link %}
+                                </li>
+                                <li>
+                                    <div id="all-project-collapse" class="collapse">
+                                        <ul class = "numbered">
+                                            {% for project in  projects %}
+                                            <li>
+                                                <div>
+                                                    {{ forloop.counter }}.
+                                                </div>
+                                                <div>
+                                                    <a href="{% url 'DevsPlatform:project-detail-view' project.id %}">
+                                                        {{ project.project_name }}
+                                                    </a>
+                                                </div>
+                                                
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </fieldset>
             </fieldset>
 
-            {% if user_teams %}
+            <!-- Users teams -->
+
             <fieldset>
                 <legend> My Teams </legend>
-                <ul>
+                {% if user_teams %}
+                <ul class = "numbered">
                     {% for team in user_teams %}
                     <li>
                         <div>{{ forloop.counter }}.</div>
                         <div>
-                            <a href="">{{ team.team.team_name }}</a> </a>
-                            {% if team.team.goal %}
-                            Aim: {{ team.team.goal }}
-                            {% endif %}
+                            <dl>
+                                <dd>
+                                    <a
+                                        href="{% url 'DevsPlatform:view-team-details' team.team.id %}">{{ team.team.team_name }}</a>
+                                    </a>
+                                </dd>
+                                <dt>
+                                    {% if team.team.goal %}
+                                    <b>Aim: </b>
+                                    {{ team.team.goal }}
+                                    {% endif %}
+                                </dt>
+                                <dt>
+                                    <b>Leadership: </b>
+                                    {% if team.member_role %}
+                                    {{team.member_role}}
+                                    {% else %}
+                                    None
+                                    {% endif %}
+                                </dt>
+                            </dl>
                         </div>
                     </li>
                     {% endfor %}
                 </ul>
-                <a href="">Create a new team</a>
+                {% else %}
+                <ul>
+                    <li>
+                        No teams yet
+                    </li>
+                </ul>
+                <hr>
+                {% endif %}
+                <ul>
+
+                    <!-- Create team link -->
+
+                    <li>
+                        <a href="{% url 'DevsPlatform:create-team' %}">Create a new team</a>
+                    </li>
+
+                    <!-- join team -->
+
+                    <li>
+                        <form action="{% url 'DevsPlatform:join_team'%}" method="POST" class="form form-inline">
+                            {% csrf_token %}
+                            <div class = "one-line">
+                                {{ join_team_form.team }}
+                                 <span class = "input-group-btn">
+                                     <input type="submit" class="btn btn-primary" value = "Join team">
+                                 </span>
+                             </div>
+                        </form>
+                    </li>
+                </ul>
             </fieldset>
 
-            {% endif %}
-
         </div>
+
+        <!-- Where all the other pages will fit -->
+
         <div class="main-content">
             {% block content %}
 
@@ -108,63 +231,71 @@
         </div>
 
         <!-- The right navigation -->
+
         <div class="right-nav">
+
             <!--User Specialisation Fields -->
+
             <fieldset>
                 <legend>Areas of Specialisation</legend>
-
-                <ul>
+                <ul class = "numbered">
                     {% for field in user_fields %}
                     <li>
                         <div>{{forloop.counter}}.</div>
-                        <div><a href="">{{ field.Area_Of_Specialisation }}</a></div>
+                        <div><a href="">{{ field.Area_Of_Specialisation }} </a> <a href="{% url 'DevsPlatform:leave-specialisation' field.Area_Of_Specialisation.id%}"><span class = "glyphicon glyphicon-remove"></span></a></div>
                     </li>
                     {% endfor %}
                     <li>
-                        
-                        <form action='{% url "login-home" %}' method="POST">
+
+                        <form action='{% url "DevsPlatform:login-home" %}' method="POST" class="form form-inline">
                             {% csrf_token %}
-                            {% for field in user_specialisation_form %}
-                            {{field}}
-                            {% endfor %}
-                            <input type="submit" value="Add">
+                            <div class = "one-line">
+                                {{ user_specialisation_form.Area_Of_Specialisation }}
+                                 <span class = "input-group-btn">
+                                     <input type="submit" class="btn btn-primary" value = "Add">
+                                 </span>
+                             </div>
                         </form>
                     </li>
                 </ul>
-                {% if messages %}
-                <ul class="messages" data-dismiss="alert">
-                    {% for message in messages %}
-                    <li class="{{ message.tags }}">
-                        {{ message }}
-                    </li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
             </fieldset>
 
             <!-- Upcoming events -->
+
             {% if upcoming_events %}
             <fieldset>
                 <legend>Upcoming Events</legend>
 
-                <ol>
+                <ul class = "numbered">
                     {% for event in upcoming_events %}
                     <li>
                         <div>{{ forloop.counter }}.</div>
                         <div>{{ event.event_name }} on {{ event.sheduled_date }} from {{ event.sheduled_time }}</div>
                     </li>
                     {% endfor %}
-                </ol>
+                </ul>
             </fieldset>
             {% endif %}
+
+            <!-- Developer tools -->
+
+            <div class = "dev-tools">
+                <fieldset>
+                    <legend>Developer Tools</legend>
+                    <ul>
+                        <li><a href="{% url 'DevsPlatform:minify-file' %}">Minifying js/css tool</a></li>
+                    </ul>
+                </fieldset>
+            </div>
         </div>
     </div>
     <footer>
 
     </footer>
-
+    <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js'%}"></script>
     <script type="text/javascript" src="{% static 'DevsPlatform/JS/main.js' %}"></script>
+    <script type="text/javascript" src="{% static 'DevsPlatform/CSS/strap/js/bootstrap.min.js'%}"></script>
+    <!-- <script type = "text/javascript" src = "{% static 'DevsPlatform/CSS/strap/js/npm.js'%}"></script> -->
 </body>
-{% endspaceless %}
 
 </html>

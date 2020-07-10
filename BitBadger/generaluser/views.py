@@ -22,7 +22,7 @@ def index(request):
                 # request.session['username'] = username
                 request.session['context'] = {}
                 messages.success(request, 'Successifully logged in!')
-                return redirect('login-home')
+                return redirect('DevsPlatform:login-home')
             else:
                 messages.error(request, "Invalid login!")
                 return HttpResponseRedirect('')

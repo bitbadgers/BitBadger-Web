@@ -1,0 +1,109 @@
+{% extends 'DevsPlatform/base.html' %}
+{% load developer_tags %}
+{% block morecss %}
+  <style type="text/css">
+    #all-project-collapse{
+        display: block;
+    }
+  </style>
+{% endblock morecss %}
+{% block view_project_collapse_link %}
+  <h5>All projects</h5>
+{% endblock view_project_collapse_link %}
+{% block content %}
+<div class = "row">
+    <div class = "center-block col-md-9 details">
+        <table class = "table">
+
+            <caption>Project {{ project_details.project_name  }} details</caption>
+            <tr>
+                <th>Project Name</th>
+                <td>{{ project_details.project_name }}</td>
+            </tr>
+            <tr>
+                <th>Project Field</th>
+                <td>{{ project_details.project_field }}</td>
+            </tr>
+            <tr>
+                <th>Start date</th>
+                <td>{{ project_details.project_start }}</td>
+            </tr>
+            <tr>
+                <th>Completion Dates</th>
+                <td>{{ project_details.project_end }}</td>
+            </tr>
+            <tr>
+                <th>Approach taken</th>
+                <td>{{ project_details.project_aproach }}</td>
+            </tr>
+            <tr>
+                <th>Head of project</th>
+                <td>{{ project_details.project_head }}</td>
+            </tr>
+            <tr>
+                <th>Mode of joining</th>
+                <td>{{ project_details.get_add_priviledge_display }}</td>
+            </tr>
+            {% if project_details.project_head == user %}
+                <tr>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li><a href="{% url 'DevsPlatform:project-detail-update' project_details.id%}">Update project details</a></li>
+                            
+                            {% UserIsNotProjectMember as is_member %}
+                            {% if is_member %}
+                                <li><a href="{% url 'DevsPlatform:project-participant-add' project_details.id%}">Join group</a></li>
+                            {% endif %}
+                                
+                        </ul>
+                    </td>
+                </tr>
+            {% endif %}
+        </table>
+
+        <div class = "title-holder">
+            <h2 class = "title">Project Participants</h2>
+        </div>        
+        
+        <table class = "table members-table table-hover">
+            <tr>
+                <th>Name</th>
+            </tr>
+            {% for member in  project_participants %}
+            <tr class = "{% if member.participant_name == user %}active{% endif %}">
+                <td >{{ member.participant_name.username }}{% if member.participant_name == user %} (<i>you</i>){% endif %}</td>
+                <td>
+                    {% if member.participant_name != user and project_details.project_head == user%}
+                    <a href="{% url 'DevsPlatform:project-remove-participant' member.participant_name.id %}">
+                        <span class = "glyphicon glyphicon-remove"></span> Remove</a>
+                    
+                    {% elif member.participant_name == user and member.participant_name != project_details.project_head%}
+                    <a href="{% url 'DevsPlatform:project-participant-leave' project_details.id%}"> Leave group </a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <form action="{% url 'DevsPlatform:project-participant-add' project_details.id %}" method="post" class = "add-participant-form">
+            {% csrf_token %}
+            <table class = "table members-table">
+                <tr>
+                    <th>Add participants</th>
+                    <td >
+                        <div class = "one-line">
+                           {{ participant_add_form.participant_name }}
+                            <span class = "input-group-btn">
+                                <input type="submit" class="btn btn-primary" value = "Add">
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+<!-- <script type = "text/javascript">
+    document.getElementById('id_')
+</script> -->
+{% endblock content %}

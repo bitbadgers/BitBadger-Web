@@ -1,0 +1,85 @@
+{% extends "DevsPlatform/base.html" %}
+{% block content %}
+<div>
+    <div class="details">
+      <table class = "table-responsive">
+		  <caption>{{ team_details.team.team_name }} details</caption>
+        <tr>
+          <th>Team Name:</th>
+          <td>{{ team_details.team.team_name }}</td>
+        </tr>
+
+        <tr>
+          <th>Team Goal:</th>
+          <td>{{ team_details.team.goal }}</td>
+        </tr>
+
+        <tr>
+          <th>Formed on:</th>
+          <td>{{ team_details.team.date_of_creation }}</td>
+        </tr>
+
+        <tr>
+          <th>Maximum Members:</th>
+          <td>{{ team_details.team.max_number }}</td>
+		</tr>
+		<tr>
+			<th>Current Members</th>
+			<td>
+				<table class = "table table-striped table-responsive">
+					{% for member in member_list%}
+						<tr>
+							<td>
+								{{ member.member_name.username  }}
+								{% if member.member_role != None%}
+								- {{ member.member_role }}
+								{% endif %}
+							</td>
+							{% if team_details.member_role == 'Chair' and team_details.member_name != member.member_name%}
+								<td>
+									<a href="{% url 'DevsPlatform:remove-team-member' member.team.id member.member_name.id %}"> <abbr title="remove user"> <span class = "glyphicon glyphicon-remove"></span></abbr></a>
+								</td>
+							{% elif team_details.member_role != 'Chair' and team_details.member_name == member.member_name%}
+								<td>
+									<a href="{% url 'DevsPlatform:remove-team-member' member.team.id member.member_name.id %}">Leave team</a>
+								</td>
+							{% else %}
+								<td></td>
+							{% endif %}
+							
+						</tr>
+					{% endfor %}
+				</table>
+			</td>
+		</tr>
+		{% if team_details.member_role == 'Chair' %}
+			<tr>
+				<td></td>
+				<td>
+					<ul>
+						<li>
+							<a href="" id = 'show-add-member-link'>Add a member</a>
+							<div id = "add-team-member-form" style = "display: none">
+								<a href="" id = 'hide-add-member-link'>Hide form</a>
+								<form action="{% url 'DevsPlatform:add-team-member' team_details.team.id%}" method = "POST" >
+									{% csrf_token %}
+									<table>
+										{{ add_team_member_form }}
+										<tr>
+											<td></td>
+											<td><button type="submit" class = "btn btn-primary">Add</button></td>
+										</tr>
+									</table>
+								</form>
+							</div>
+						</li>
+						<li><a href="{% url 'DevsPlatform:update-team-details' team_details.team.id %}" class = "">Alter Teams Details </a></li>
+					</ul>
+				</td>
+			</tr>
+		{% endif %}
+		
+      </table>
+    </div>
+</div>
+{% endblock content %}

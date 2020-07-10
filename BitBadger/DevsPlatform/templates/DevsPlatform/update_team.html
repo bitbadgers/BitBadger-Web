@@ -1,0 +1,16 @@
+{% extends "DevsPlatform/base.html" %}
+{% block content %}
+  <div class = "forms">
+      <form action="{% url 'DevsPlatform:update-team-details' team_id %}" method = 'POST'>
+          {% csrf_token %}
+          <table>
+              <caption>Update details</caption>
+            {{ update_team_form }}
+            <tr>
+                <td></td>
+                <td><button type = "submit" >Update</button></td>
+            </tr>
+          </table>
+      </form>
+  </div>
+{% endblock content %}
