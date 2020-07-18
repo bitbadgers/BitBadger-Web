@@ -1,0 +1,73 @@
+{% extends 'DevsPlatform/base.html' %}
+{% load static %}
+
+{% block morecss %}
+    <link rel="stylesheet" href="{%static 'chat/css/main.css' %}">
+{% endblock morecss %}
+    
+{% block content %}
+  <div class = "chatbox">
+    <div class = "contacts">
+        <input type="text" class = "contact-search" id = "search" placeholder="Search...">
+        {% load chat_templates %}
+        {% for single_user in users %}
+            {% if  single_user != user%}
+            {% create_room_name single_user.id as details %}
+            <a href = "{% url 'room' details.room_name %}" class = "chat" id = '{{ details.room_name }}' {%if details.room_name == room_name %} style="background-color: rgb(11, 105, 74);"{%endif%}>
+                <div class = "pic">
+                    <!-- <img src="" alt="" class = "profpic"> -->
+                    <span class = "glyphicon glyphicon-user"></span>
+                </div>
+                <div class = "Details">
+                    <span class = "chat-name">{{ single_user }} </span>
+                    <span class = "message-counter" id = "count-{{details.room_name}}">{% if  details.unread_messages%}{{details.unread_messages}}{% else %}&nbsp;{% endif %}</span>
+
+                    <p class = 'preview'>
+                        {% if details.latest_text.content %}
+                            <span style="font-size: 8px;">
+                                >>
+                            </span>
+                            <span id  = "preview-{{details.room_name}}-text">
+                                {{ details.latest_text.content }}
+                            </span>
+                            
+                        {% endif %}
+                    </p>
+                    <span class = "message-time" id  = "preview-{{details.room_name}}-time">
+                        {% generate_date details.latest_text.timestamp as day %}
+                        {% if day %}
+                            {{ day }} {{details.latest_text.timestamp | time:'P'}}
+                        {% else %}
+                            {{details.latest_text.timestamp}}
+                        {% endif %}
+                        <br>
+                        <span id = "typing-{{details.room_name}}" class = "typing" style = "color:blue">
+
+                        </span>
+                    </span>
+                </div>
+            </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <script>
+        function styleUnread(){
+            var message_counter = document.querySelectorAll('.message-counter');
+            i = message_counter.length;
+            while(i--){
+              if(message_counter[i].innerHTML == '&nbsp;'){
+                message_counter[i].style.display = 'none';
+              }else{
+                message_counter[i].style.display = 'block';
+              }
+            }
+        }
+        styleUnread();
+    </script>
+    <div class = "messages-container">
+        {% block messages %}
+          
+        {% endblock messages %}
+    </div>
+  </div>
+{% endblock content %}

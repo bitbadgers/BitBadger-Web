@@ -38,7 +38,8 @@
             <a href="{% url 'DevsPlatform:logout' %}"><button class="btn btn-primary">Logout</button></a>
         </section>
 
-        {% if messages %}
+        <section class = "django-messages">
+            {% if messages %}
             <ul class="messages" data-dismiss="alert" >
                 {% for message in messages %}
                 <span class="says {{ message.tags}}-say"> &#9206;</span>
@@ -48,6 +49,8 @@
                 {% endfor %}
             </ul>
         {% endif %}
+        </section>
+        
 
     </header>
     <div class="content">
@@ -281,9 +284,10 @@
 
             <div class = "dev-tools">
                 <fieldset>
-                    <legend>Developer Tools</legend>
+                    <legend>Developer Tools & fun</legend>
                     <ul>
                         <li><a href="{% url 'DevsPlatform:minify-file' %}">Minifying js/css tool</a></li>
+                        <li><a href="{% url 'chat'%}">Chat box</a></li>
                     </ul>
                 </fieldset>
             </div>

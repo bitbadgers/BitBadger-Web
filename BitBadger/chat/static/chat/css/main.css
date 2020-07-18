@@ -1,0 +1,233 @@
+.chatbox{
+    margin: auto;
+    display: flex;
+    height: 500px;
+}
+.chatbox .contacts{
+    width: 30%;
+    background-color: rgba(11, 105, 74, 0.8);
+    color: white;
+}
+
+.chatbox .message-container{
+    width: 60%;
+    display: block;
+}
+
+.contact-search{
+    width: 100%;
+    height:40px;
+    background-color:rgba(11, 105, 74, 0.2);
+    border: #435f7a solid 1px;
+    font-size: 16px;
+}
+
+.contacts a{
+    color: unset;
+    width: unset;
+    background: unset;
+}
+
+.contacts a:hover{
+    color: unset;
+    text-decoration: unset;
+}
+
+.chat{
+    display: flex;
+    vertical-align: top;
+    height: 70px;
+    margin:0px;
+    padding:1px 0px 5px 0px;
+    cursor: pointer;
+    -moz-transition: 0.3s all ease;
+    -o-transition: 0.3s all ease;
+    -webkit-transition: 0.3s all ease;
+    transition: 0.3s all ease;
+}
+
+.message-counter{
+    float:right;
+    border-radius:50%;
+    color:white;
+    padding-left:3px;
+    padding-right:3px;
+    background: red;
+}
+
+.chat:hover{
+    background-color: rgb(11, 105, 74);
+}
+
+.active{
+    background-color: rgb(11, 105, 74);
+    color: red;
+    width: 2px;
+}
+
+.pic{
+    position: relative;
+    /* top: 20px; */
+    padding-right: 3px;
+}
+
+.pic span{
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: rgba(255,255,255,0.5);
+}
+
+.Details{
+    width: 80%;
+    margin: auto;
+}
+.Details h4{
+    height: 10px;
+    color: rgb(221, 221, 235);
+    font-weight: 600
+}
+.Details p{
+    margin: 5px 0 0 0;
+    padding: 0 0 1px;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.Details .message-time{
+    font-style: italic;
+    font-size: 10px;
+    float:right;
+}
+
+/* Messages container styling */
+.messages-container{
+    width:70%;
+    background: cross-fade(red);
+}
+/* receiver info style */
+.receiver{
+    display: flex;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background: #f5f5f5;
+    clear:both;
+}
+.receiver-image{
+    width: 10%;
+    height: 100%;
+    margin-right: 10px;
+}
+.receiver-image img{
+    width:100%;
+    height:100%;
+    border-radius: 50%;
+}
+
+.receiver-name{
+    width:70%;
+    overflow: hidden;
+}
+
+/* style messages content */
+.messages-section{
+    width:100%;
+    height: 390px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.messages-section::-webkit-scrollbar {
+    width: 8px;
+    background: transparent;
+    border-radius: none;
+}
+.messages-section::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* style write message */
+
+.write-message{
+    height:40px;
+    width:100%;
+    border:0.5px solid rgba(0,0,0,0.5);
+}
+
+.write-message input{
+    height: 100%;
+    outline: none;
+    border: none;
+    padding:0px;
+    margin:0px;
+    border-radius: none;
+    width: calc(100% - 50px);
+    float:left;
+    font-size: 16px;
+}
+.write-message input:focus{
+    outline:powderblue;
+    border-color: powderblue;
+}
+.write-message .submit{
+    height: 100%;
+    padding:0px;
+    margin:0px;
+    width:50px;
+    border:none;
+    border-left:none;
+    background: rgb(50, 70, 90);
+    color:white;
+    transition: .3s;
+    float: right;
+}
+
+.write-message .submit:hover{
+    background: rgba(50, 70, 90, 0.9);
+}
+
+/* style the message list i.e chat-log */
+#chat-log{
+    list-style-type: none;
+}
+#chat-log li{
+    display: inline-block;
+    clear: both;
+    margin: 15px 15px 5px 15px;
+    width: calc(100% - 25px);
+    font-size: 0.9em;
+}
+
+#chat-log li:nth-last-child(1) {
+    margin-bottom: 20px;
+  }
+#chat-log li.sent img {
+margin: 6px 8px 0 0;
+}
+#chat-log li.sent p {
+    background: #435f7a;
+    color: #f5f5f5;
+}
+
+#chat-log li.replies p {
+    background: #f5f5f5;
+    float: right;
+}
+
+#chat-log li p {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 20px;
+    max-width: 205px;
+    line-height: 130%;
+}
+
+/*=====================================================*/
+.time{
+    float:right;
+    font-size: 9px;
+    font-style: italic;
+}

@@ -1,0 +1,307 @@
+{% extends 'DevsPlatform/base.html' %}
+{% block morecss %}
+{% load static %}
+{% load chat_templates %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta charset='UTF-8'>
+<meta name="robots" content="noindex">
+<!-- <link rel="stylesheet" href="{% static 'chat/css/bootstrap.min.css'%}"> -->
+<link rel="stylesheet" href="{% static 'chat/css/fonts.googleapis.css' %}">
+
+<link rel="stylesheet" href="{%static 'chat/css/chat.css' %}">
+
+<style>
+  .contact {
+    vertical-align: top;
+    height: 70px;
+  }
+
+  #contacts a {
+    color: unset;
+  }
+
+  #contacts a:hover {
+    text-decoration: unset;
+  }
+
+  .message-counter {
+    color: red;
+    background-color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    margin-left: calc(100% - 20px);
+    position: relative;
+    top: -35px;
+    text-align: center;
+    font-weight: bold;
+    vertical-align: middle;
+  }
+
+  .contact li {
+    display: flex-box;
+  }
+  
+</style>
+{% endblock morecss %}
+
+
+{% block content %}
+<div id="frame">
+  <div id="sidepanel">
+    <div id="profile">
+      <div class="wrap">
+        <img id="profile-img" src='{% static "chat/images/head.png"%}'' class="online" alt="" />
+        <p>{{user}}</p>
+        <i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
+      </div>
+    </div>
+    <div id="search">
+      <label for=""><i class="" aria-hidden="true"></i></label>
+      <input type="text" placeholder="Search contacts..." />
+    </div>
+    <div id="contacts">
+      <ul>
+        {% for single_user in users %}
+          {% if single_user != user %}
+          {% create_room_name single_user.id as new_room_name %}
+            <li class="contact">
+              <a href="{% url 'room' new_room_name.0 %}">
+                <div class="wrap">
+                  
+                  <span class="contact-status online"></span>
+                  <img src="{% static 'chat/images/head.png'%}" alt="" />
+                  <div class="meta">
+                    <p class="name">{{ single_user.username }}</p>
+                    <p class="preview" id = "preview-{{new_room_name.0}}">{{ new_room_name.1.0.content }}</p>
+                  </div>
+                  <section class = "message-counter" id = "count-{{new_room_name.0}}">{% if  new_room_name.2 != 0 %}{{ new_room_name.2 }}{% else %}&nbsp;{% endif %}</section>
+                </div>
+              </a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+    <div id="bottom-bar">
+      <button id="addcontact"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Add
+          contact</span></button>
+      <button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
+    </div>
+  </div>
+  {% if room_name_json %}
+  <div class="content">
+    <div class="contact-profile">
+      <img src="{% static 'chat/images/head.png'%}" alt="" />
+      <p>{{ receiver.username }}</p>
+      <div class="social-media">
+        <i class="fa fa-facebook" aria-hidden="true"></i>
+        <i class="fa fa-twitter" aria-hidden="true"></i>
+        <i class="fa fa-instagram" aria-hidden="true"></i>
+      </div>
+    </div>
+      <div class="messages" id = "messages-div">
+        <ul id = "chat-log">
+
+        </ul>
+      </div> 
+        <div class="message-input">
+          <div class="wrap">
+            <input type="text" placeholder="Write your message..." id="chat-message-input" />
+            <i class=" fa fa-paperclip attachment" aria-hidden="true"></i>
+            <button class="submit" id="chat-message-submit"><i class="" aria-hidden="true"></i> Send</button>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  {{ room_name|json_script:"room-name" }}
+  <script src='{% static "chat/js/reconnecting-websocket.js" %}'></script>
+
+  <script>
+    var roomName = {{room_name_json}};
+    var username = {{username}};
+    var receiverId = {{ receiver.id }}
+
+    //================== message counter socket =====================
+    const messageCounterSocket = new ReconnectingWebSocket(
+      'ws://'+
+      window.location.host+
+      '/ws/chat/count/messages/'
+    )
+
+    messageCounterSocket.onmessage = function(e){
+      var data = JSON.parse(e.data);
+      var room_name = data['room_name'];
+      var message_count = data['message_count'];
+      var receiver_id = data['receiver_id']
+      var user_id = {{user.id}}
+      console.log("Hello world");
+      console.log(user_id);
+      var room_name_id = "#count-"+room_name;
+      
+      try{
+        if(roomName != room_name){
+          if(parseInt(message_count) != 0){
+            document.querySelector(room_name_id).innerHTML = message_count;
+            styleUnread();
+          }
+        } 
+      }catch(error){
+
+      }
+    }
+
+    function countUnreadMessages(){
+      messageCounterSocket.send(JSON.stringify({
+        'receiver_id' : receiverId,
+        'room_name' : roomName,
+      }))
+    }
+    
+    //const roomName = JSON.parse(document.getElementById('room-name').textContent);
+    const chatSocket = new ReconnectingWebSocket(
+      'ws://' +
+      window.location.host +
+      '/ws/chat/' +
+      roomName +
+      '/'+receiverId+'/'
+    );
+
+    chatSocket.onopen = function (e) {
+      fetchMessages();
+    }
+
+    chatSocket.onmessage = function (e) {
+      countUnreadMessages(); //count the unread messages
+
+      const data = JSON.parse(e.data);
+
+      if (data['command'] === 'messages') {
+        i = data['messages'].length
+        while(i--){
+          createMessage(data['messages'][i])
+        }
+
+      } else {
+        createMessage(data['messages'])
+        try{
+          const preview_id = '#preview-'+roomName;
+          document.querySelector(preview_id).innerHTML = data['messages']['content'];
+        }catch(error){
+
+        }
+      }
+
+    };
+    chatSocket.onclose = function (e) {
+      console.error('Chat socket closed unexpectedly');
+    };
+    
+
+    function fetchMessages() {
+      chatSocket.send(JSON.stringify({
+        'command': 'fetch_messages'
+      }))
+    }
+
+    function createMessage(data) {
+      var message = data['content'];
+      var author = data['author'];
+      var msgListTag = document.createElement('li');
+      var imgTag = document.createElement('img');
+      var pTag = document.createElement('p');
+
+      imgTag.src = "{% static 'chat/images/head.png' %}";
+
+      pTag.textContent = message;
+
+      if (author === username) {
+        msgListTag.className = 'sent';
+      } else {
+        msgListTag.className = 'replies';
+      }
+
+      msgListTag.appendChild(imgTag);
+      msgListTag.appendChild(pTag);
+
+      document.querySelector('#chat-log').appendChild(msgListTag);
+      var messageBox = document.querySelector('#messages-div');
+      messageBox.scrollTop = messageBox.scrollHeight;
+    }
+  
+    //====================== The notification socket =====================================
+
+    const notificationSocket = new ReconnectingWebSocket(
+      'ws://' +
+      window.location.host +
+      '/ws/chat-/notification/'
+    );
+
+    notificationSocket.onmessage = function(e){
+      const data = JSON.parse(e.data);
+      var roomNameId = data['room_name_id'];
+      var messageReceived = data['message_received'];
+
+      try{
+        const preview_id = '#preview-'+roomNameId
+        document.querySelector(preview_id).innerHTML = messageReceived;
+      }catch(error){
+
+      }
+
+    }
+
+    notificationSocketonclose = function (e) {
+      console.error('Chat socket closed unexpectedly');
+    }
+
+    //========================= send action ==============================
+
+    document.querySelector('#chat-message-input').focus();
+    document.querySelector('#chat-message-input').onkeyup = function (e) {
+      if (e.keyCode === 13) { // enter, return
+        document.querySelector('#chat-message-submit').click();
+      }
+    };
+    document.querySelector('#chat-message-submit').onclick = function (e) {
+      const messageInputDom = document.querySelector('#chat-message-input');
+      const message = messageInputDom.value;
+
+      if(message == ""){
+        e.precentDefault();
+      }else{
+        chatSocket.send(JSON.stringify({
+          'message': message,
+          'command': 'new_message',
+          'from': username
+        }));
+  
+        notificationSocket.send(JSON.stringify({
+          'message_received' : message,
+          'room_name_id' : roomName
+        }));
+  
+        messageInputDom.value = '';
+      }
+
+    };
+
+  </script>
+  {% endif %}
+  <script>
+    function styleUnread(){
+      var message_counter = document.querySelectorAll('.message-counter');
+      i = message_counter.length;
+      while(i--){
+        if(message_counter[i].innerHTML == '&nbsp;'){
+          message_counter[i].style.backgroundColor = 'unset';
+        }else{
+          message_counter[i].style.backgroundColor = 'white';
+        }
+      }
+  }
+  styleUnread();
+  </script>
+
+{% endblock content %}

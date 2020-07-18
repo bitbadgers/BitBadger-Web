@@ -1,0 +1,263 @@
+{% extends 'chat/room.html' %}
+{% load static %}
+{% block messages %}
+    <div class = "receiver">
+        <div class = "receiver-image">
+            <img src="{% static 'chat/images/head.png'%}" alt="">
+        </div>
+        <div class = "receiver-name">
+            <h2>{{receiver.username}}</h2>
+            <span id = "typing-{{details.room_name}}" class = "typing" style = "color:blue;float:right">
+
+            </span>
+        </div>
+    </div>
+    <div class="messages-section" id = "messages-div">
+        <ul id = "chat-log">
+          {% load chat_templates %}
+          {% for message in preload_messages %}
+            <li {% if message.author == user %} class = 'sent' {%else%} class = 'replies'{% endif %}>
+              <p>
+                {{ message.content }}
+                <br>
+                <span class = "time">
+                  {{message.timestamp | time:'P'}}
+                </span>
+              </p>
+            </li>
+          {% endfor %}
+        </ul>
+    </div>
+    <div class = "write-message">
+        <input type="text" placeholder="Write new message ..." id = "chat-message-input">
+        <button class = "submit" id = "chat-message-submit">Send</button>
+    </div>
+
+<!-- Chat javascript -->
+
+{{ room_name|json_script:"room-name" }}
+<script src='{% static "chat/js/reconnecting-websocket.js" %}'></script>
+
+<script>
+
+    var roomName = {{room_name_json}};
+    var username = {{username}};
+    var receiverId = {{ receiver.id }}
+    var userId = {{ user.id }}
+
+    //================== message counter socket =====================
+    const messageCounterSocket = new ReconnectingWebSocket(
+      'ws://'+
+      window.location.host+
+      '/ws/chat/count/messages/'
+    )
+
+    messageCounterSocket.onmessage = function(e){
+      var data = JSON.parse(e.data);
+      var room_name = data['room_name'];
+      var message_count = data['message_count'];
+      var receiver_id = data['receiver_id']
+      var state = data['state']
+      var room_name_id = "#count-"+room_name;
+
+      try{
+        if(roomName != room_name){
+          if(parseInt(message_count) != 0){
+            document.querySelector(room_name_id).innerHTML = message_count;
+            styleUnread();
+          }
+        }else{
+          if(state == "update"){
+            messageCounterSocket.send(JSON.stringify({
+              'receiver_id' : userId,
+              'room_name' : roomName,
+              'user_id' : userId,
+            }))
+          }
+        }
+      }catch(error){
+
+      }
+    }
+
+    function countUnreadMessages(){
+      messageCounterSocket.send(JSON.stringify({
+        'receiver_id' : receiverId,
+        'room_name' : roomName,
+        'user_id' : userId,
+      }))
+    }
+    
+    //const roomName = JSON.parse(document.getElementById('room-name').textContent);
+    const chatSocket = new ReconnectingWebSocket(
+      'ws://' +
+      window.location.host +
+      '/ws/chat/' +
+      roomName +
+      '/'+receiverId+'/'
+    );
+
+    chatSocket.onmessage = function (e) {
+      countUnreadMessages(); //count the unread messages
+
+      const data = JSON.parse(e.data);
+
+      if (data['command'] === 'messages') {
+        i = data['messages'].length
+        while(i--){
+          createMessage(data['messages'][i])
+        }
+
+      } else {
+        createMessage(data['messages'])
+        try{
+          const preview_id = '#preview-'+roomName+'-text';
+          document.querySelector(preview_id).innerHTML = data['messages']['content'];
+        }catch(error){
+
+        }
+      }
+
+    };
+    chatSocket.onclose = function (e) {
+      console.error('Chat socket closed unexpectedly');
+    };
+    
+    function createMessage(data) {
+      var message = data['content'];
+      var author = data['author'];
+      var msgListTag = document.createElement('li');
+      var imgTag = document.createElement('img');
+      var pTag = document.createElement('p');
+
+      //imgTag.src = "{% static 'chat/images/head.png' %}";
+
+      pTag.textContent = message;
+
+      if (author === username) {
+        msgListTag.className = 'sent';
+      } else {
+        msgListTag.className = 'replies';
+      }
+
+      msgListTag.appendChild(imgTag);
+      msgListTag.appendChild(pTag);
+
+
+      document.querySelector('#chat-log').appendChild(msgListTag);
+      var messageBox = document.querySelector('#messages-div');
+      messageBox.scrollTop = messageBox.scrollHeight;
+    }
+  
+    //====================== The notification socket =====================================
+
+    const notificationSocket = new ReconnectingWebSocket(
+      'ws://' +
+      window.location.host +
+      '/ws/chat-/notification/'
+    );
+
+    notificationSocket.onmessage = function(e){
+      const data = JSON.parse(e.data);
+      var roomNameId = data['room_name_id'];
+      var messageReceived = data['message_received'];
+
+      try{
+        const preview_id = '#preview-'+roomNameId+'-text';
+        document.querySelector(preview_id).innerHTML = messageReceived;
+      }catch(error){
+
+      }
+
+    }
+
+    notificationSocketonclose = function (e) {
+      console.error('Chat socket closed unexpectedly');
+    }
+
+    //========================= send action ==============================
+
+    document.querySelector('#chat-message-input').focus();
+    document.querySelector('#chat-message-input').onkeyup = function (e) {
+      if (e.keyCode === 13) {
+        document.querySelector('#chat-message-submit').click();
+      }
+    };
+    document.querySelector('#chat-message-submit').onclick = function (e) {
+      const messageInputDom = document.querySelector('#chat-message-input');
+      const message = messageInputDom.value;
+
+      if(message == ""){
+        e.preventDefault();
+      }else{
+        chatSocket.send(JSON.stringify({
+          'message': message,
+          'command': 'new_message',
+          'from': username
+        }));
+  
+        notificationSocket.send(JSON.stringify({
+          'message_received' : message,
+          'room_name_id' : roomName
+        }));
+  
+        messageInputDom.value = '';
+      }
+    };
+
+    //======================= Typing... =====================
+
+    const typingState = new ReconnectingWebSocket(
+      'ws://'+
+      window.location.host +
+      '/ws/chat/state/tyiping/'
+    )
+
+    typingState.onmessage = function(e){
+      var data = JSON.parse(e.data);
+      var sender = data['sender'];
+      var receiver = data['receiver'];
+      var current_room_name = data['current_room_name'];
+
+      var spanId = '#typing-'+current_room_name;
+      var typingSpan = document.querySelectorAll(spanId);
+      var x = typingSpan.length;
+
+      console.log(x);
+
+      if(sender != userId){
+          while(x--){
+            typingSpan[x].innerHTML = "Typing...";
+          }
+          x = typingSpan.length;
+        }
+        setTimeout(clearTypingSpan, 30000)
+    }
+
+    function sendToTpyping(){
+      typingState.send(JSON.stringify({
+        'receiver_id' : receiverId,
+        'sender_id' : userId,
+        'current_room_name' : roomName
+      }))
+    }
+
+
+    document.querySelector('#chat-message-input').addEventListener('input', (ev)=>{
+      sendToTpyping();
+    });
+
+    function clearTyipingSpan(spanId){
+      x = document.querySelectorAll(spanId);
+      while(x--){
+        typingSpan[x].innerHTML = "";
+      }
+    }
+  </script>
+
+  <script>
+</script>
+
+  {% endblock messages %}
+
+    
